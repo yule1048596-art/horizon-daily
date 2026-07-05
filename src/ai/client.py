@@ -495,15 +495,23 @@ class GeminiClient(AIClient):
         temperature = self.temperature if temperature is None else temperature
         max_tokens = self.max_tokens if max_tokens is None else max_tokens
 
+        config_kwargs = dict(
+            system_instruction=system,
+            temperature=temperature,
+            max_output_tokens=max_tokens,
+            response_mime_type="application/json"
+        )
+        # gemini-2.5-* are thinking models that consume tokens for internal
+        # reasoning. Disable explicit thinking so output tokens are available
+        # for the actual response.
+        if "2.5" in self.model:
+            config_kwargs["thinking_config"] = types.ThinkingConfig(
+                thinking_budget=0
+            )
         response = await self.client.aio.models.generate_content(
             model=self.model,
             contents=user,
-            config=types.GenerateContentConfig(
-                system_instruction=system,
-                temperature=temperature,
-                max_output_tokens=max_tokens,
-                response_mime_type="application/json"
-            )
+            config=types.GenerateContentConfig(**config_kwargs)
         )
         usage = getattr(response, "usage_metadata", None)
         if usage is not None:
