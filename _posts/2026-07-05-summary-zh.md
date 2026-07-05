@@ -5,244 +5,248 @@ date: 2026-07-05
 lang: zh
 ---
 
-> 从 66 条内容中筛选出 10 条重要资讯。
+> 从 64 条内容中筛选出 10 条重要资讯。
 
 ---
 
-1. [华为何庭波发布'韬定律'V2 版论文，补充工程细节和实测数据。](#item-1) ⭐️ 9.0/10
-2. [YouTube AI 评论建议功能存在提示注入漏洞，可泄露创作者私人视频](#item-2) ⭐️ 8.0/10
-3. [能力更强的语言模型在工具调用方面可能表现更差](#item-3) ⭐️ 8.0/10
-4. [报告揭示 LLM 用户账户间潜在会话数据泄露风险](#item-4) ⭐️ 8.0/10
-5. [AI 模型 Claude Fable 驱动 sqlite-utils 4.0rc2 发布](#item-5) ⭐️ 8.0/10
-6. [GPT-5.5 Codex 性能回归可追溯至 516 个推理 token 的聚类问题。](#item-6) ⭐️ 7.0/10
-7. [USAF：在消费级 GPU 上对 MoE 模型进行开源稀疏微调](#item-7) ⭐️ 7.0/10
-8. [同人社区因 AI 检测方法及误判问题陷入分裂。](#item-8) ⭐️ 6.0/10
-9. [半导体与 AI 浪潮推动国产含氟新材料进入高速成长期](#item-9) ⭐️ 6.0/10
-10. [美光科技投资 93 亿美元扩建广岛工厂，生产 AI 存储芯片](#item-10) ⭐️ 6.0/10
+1. [Claude Fable 以 149.25 美元成本在 sqlite-utils 4.0 中发现关键缺陷](#item-1) ⭐️ 8.0/10
+2. [达特茅斯 AI 导师研究显示显著学习成效，但存在重要局限。](#item-2) ⭐️ 7.0/10
+3. [数字游戏所有权争论的核心是权利，而非实体与数字媒体之分](#item-3) ⭐️ 7.0/10
+4. [新模拟器分支使 Windows 2000 能在 DEC Alpha 硬件上运行。](#item-4) ⭐️ 7.0/10
+5. [更新的 Claude 模型在自定义工具模式上表现更差](#item-5) ⭐️ 7.0/10
+6. [港大教授创立的忆生科技获数亿融资，研发机器人记忆系统](#item-6) ⭐️ 7.0/10
+7. [清华系光象科技获数亿元融资，押注物理原生具身智能机器人](#item-7) ⭐️ 7.0/10
+8. [博士生质疑内在动机研究在机器人技术进展下的可行性](#item-8) ⭐️ 7.0/10
+9. [一名学生为突尼斯阿拉伯方言构建了开源机器翻译流程和语料库。](#item-9) ⭐️ 7.0/10
+10. [仅用 445 字节压缩数据生成 ASCII 世界地图](#item-10) ⭐️ 6.0/10
 
 ---
 
 <a id="item-1"></a>
-## [华为何庭波发布'韬定律'V2 版论文，补充工程细节和实测数据。](https://36kr.com/newsflashes/3880931591254019?f=rss) ⭐️ 9.0/10
+## [Claude Fable 以 149.25 美元成本在 sqlite-utils 4.0 中发现关键缺陷](https://simonwillison.net/2026/Jul/5/sqlite-utils-fable/#atom-everything) ⭐️ 8.0/10
 
-华为半导体负责人何庭波发布了'韬定律'（面向多层级电子系统的时间缩微理论）论文 V2 版本，该版本在原有理论框架上补充了大量工程落地细节、实测量化数据和产品演进路线图。新版本深度阐释了 LogicFolding 技术及其用于三维芯片设计的'齿比'概念，并提供了麒麟 2026 芯片的具体性能参数。 此次更新通过提供真实芯片的工程验证数据，将华为提出的'后摩尔时代'半导体缩放理论从理论框架推向了实际验证阶段，为先进芯片设计开辟了一条新的架构路径。它为下一代芯片提供了具体的演进路线图，挑战了业界长期依赖的传统几何缩放模式。 一个关键的技术细节是 LogicFolding 架构，它利用'齿比'来优化垂直逻辑划分，当混合键合间距接近顶层金属布线尺寸时，三维设计空间从'宏块级离散优化'转向'单元级连续优化'，可实现全局最优。论文新增了麒麟 2026 芯片的量产实测数据表，明确给出了其与基准麒麟 9030 Pro 在电压、频率、归一化功耗、面积和功率密度等方面的对比参数。
+Simon Willison 使用 Anthropic 的 Claude Fable 模型对 sqlite-utils 库在 4.0 稳定版发布前进行了最终代码审查，该模型识别出了五个发布阻塞性错误，其中包括一个严重的数据丢失问题，总成本约为 149.25 美元。 这个案例提供了一个具体、真实的例证，展示了使用高级 AI 进行关键软件质量保证任务的实际经济性和有效性，特别是对于维护广泛使用的开源库。 审查发现了一个关键错误：`delete_where()` 方法未能提交事务并导致数据库连接状态异常，存在数据丢失风险；整个过程涉及 37 次提示、34 次代码提交以及 30 个文件的更改。
 
-rss · 36kr - AI · 7月4日 06:35
+rss · Simon Willison · 7月5日 01:00
 
-**背景**: 摩尔定律（观察到芯片上的晶体管数量大约每两年翻一番）在过去几十年里一直指导着半导体行业的发展，但目前已接近物理和经济极限。'韬定律'是华为提出的用于后摩尔时代缩放的替代框架，它使用时间常数（τ）作为新的通用度量标准，跨越从器件到整个系统的各个层级来优化系统性能。LogicFolding 是一种三维芯片设计技术，利用硅通孔和混合键合将有源逻辑层垂直堆叠，以缩短信号路径，从而降低延迟和功耗。
+**背景**: sqlite-utils 是一个流行的 Python 库和命令行工具，用于操作 SQLite 数据库，由 Simon Willison 创建。Claude Fable 是 Anthropic 推出的大型语言模型，能够执行代码分析等复杂任务。语义化版本控制（SemVer）是一种版本控制方案，其中主版本号的增加（如 4.0）表示不兼容的 API 变更，因此发布前的审查至关重要。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.huawei.com/en/news/2026/5/ieee-iscas-tau-scaling">HUAWEI Presents the Tau (τ) Scaling Law, Enabling ...</a></li>
-<li><a href="https://d-sci.org/index.php/dsci/article/view/40">A Formal Investigation of Tau (τ) Scaling Theory for Multi ...</a></li>
-<li><a href="https://www.tomshardware.com/tech-industry/semiconductors/peking-university-builds-3d-chip-design-tool-tailored-to-huaweis-logicfolding-architecture">Chinese university builds 3 D chip design tool... | Tom's Hardware</a></li>
+<li><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Claude Fable 5 and Claude Mythos 5 \ Anthropic</a></li>
+<li><a href="https://www.anthropic.com/claude/fable">Claude Fable \ Anthropic</a></li>
+<li><a href="https://simonwillison.net/2019/Feb/25/sqlite-utils/">sqlite - utils : a Python library and CLI tool for building SQLite databases</a></li>
 
 </ul>
 </details>
 
-**标签**: `#semiconductor`, `#chip-design`, `#3D-stacking`, `#Huawei`, `#post-Moore-Law`
+**社区讨论**: 本文本身未包含可分析的读者评论，但该文章在 Hacker News 等平台上被分享，讨论可能聚焦于使用 AI 进行代码审查的实际成本效益、所发现错误的严重性，以及对开源项目维护的影响。
+
+**标签**: `#AI-assisted development`, `#software engineering`, `#code review`, `#SQLite`, `#developer tools`
 
 ---
 
 <a id="item-2"></a>
-## [YouTube AI 评论建议功能存在提示注入漏洞，可泄露创作者私人视频](https://javoriuski.com/post/youtube) ⭐️ 8.0/10
+## [达特茅斯 AI 导师研究显示显著学习成效，但存在重要局限。](https://intextbooks.science.uu.nl/workshop2026/files/itb26_s1s2.pdf) ⭐️ 7.0/10
 
-一名安全研究人员披露了 YouTube AI 驱动的评论建议功能中的一个提示注入漏洞，攻击者通过恶意评论，可以在创作者使用 YouTube 工作室中的该功能时，诱使 AI 泄露关于创作者私人、未列出视频的详细信息。 此漏洞凸显了将大型语言模型集成到面向用户的产品中时存在一个根本性的、实际的安全缺陷，可能损害创作者隐私和平台信任，并突显了防御提示注入攻击的系统性挑战。 该攻击需要一个复杂的多步骤社工链：攻击者必须在创作者的视频下发布精心构造的评论，然后创作者必须在 YouTube 工作室中主动点击 YouTube 提供的 AI 建议提示来总结评论。该漏洞利用了 AI 处理过程中用户提供的评论与系统指令之间缺乏清晰角色边界的问题。
+一项在达特茅斯课程中进行的研究发现，一个 AI 导师系统在学生完全投入使用的情况下，能够实现介于 0.71 到 1.30 个标准差之间的学习成效效应量。 这一结果表明，AI 导师可能对教育成果产生重大积极影响，提供了一种可扩展的个性化学习辅助方式，但其显著程度需要审慎解读。 报告的效应量是基于一小部分学生（约 16 人，占总数的 11%）完全投入使用的数据得出的，且该研究并非随机对照试验，这限制了其因果声明的强度。
 
-hackernews · javxfps · 7月4日 16:45 · [社区讨论](https://news.ycombinator.com/item?id=48786781)
+hackernews · jonahbard · 7月5日 18:47 · [社区讨论](https://news.ycombinator.com/item?id=48796817)
 
-**背景**: 提示注入是大型语言模型（LLM）应用中一类已知的安全漏洞，即嵌入在用户输入中的恶意指令可能劫持模型的行为。YouTube 的 AI 评论建议功能旨在通过生成草拟回复或摘要，帮助创作者高效管理大量评论。此类系统的一个关键安全原则是严格隔离不可信的用户输入和可信的系统提示，而此漏洞似乎违反了这一原则。
+**背景**: 效应量是一个用于量化组间差异大小的统计度量，通常以标准差（SD）表示。在教育研究中，0.2 SD 的效应量通常被认为是小的，0.5 为中等，0.8 为大。霍桑效应是指个体因为意识到自己被观察而改变行为的现象，这可能会虚增短期结果。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">LLM01:2025 Prompt Injection - OWASP Gen AI Security Project</a></li>
-<li><a href="https://www.hackerone.com/ai/prompt-injection-deep-dive">AI Prompt Injection : Vulnerability , Impact, and Remediation</a></li>
+<li><a href="https://link.springer.com/article/10.1007/s10649-019-09908-4">Beyond small, medium, or large: points of consideration when interpreting effect sizes | Educational Studies in Mathematics | Springer Nature Link</a></li>
+<li><a href="https://journals.sagepub.com/doi/10.3102/01623737221079646">How Big Are Effect Sizes in International Education Studies? - David K. Evans, Fei Yuan, 2022</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区讨论参与度很高，一位前 Google 工程师表示，YouTube 的处理方式可能受到内部绩效评估结构的影响，而非纯粹的安全分类。许多评论者对 YouTube 不将提示注入视为漏洞感到难以置信，也有评论赞扬了研究人员清晰、事实求是的披露风格。
+**社区讨论**: 社区讨论对报告的显著成效持怀疑态度，主要担忧包括投入使用的样本量小、缺乏随机对照试验，以及新奇效应（霍桑效应）的潜在影响。然而，一些评论者看到了这种方法的价值，并对将大型语言模型与教育材料相结合的广泛潜力感到兴奋。
 
-**标签**: `#security-vulnerability`, `#prompt-injection`, `#youtube`, `#ai-security`, `#privacy`
+**标签**: `#AI-education`, `#edtech`, `#LLM-applications`, `#educational-research`, `#statistical-methodology`
 
 ---
 
 <a id="item-3"></a>
-## [能力更强的语言模型在工具调用方面可能表现更差](https://lucumr.pocoo.org/2026/7/4/better-models-worse-tools/) ⭐️ 8.0/10
+## [数字游戏所有权争论的核心是权利，而非实体与数字媒体之分](https://popcar.bearblog.dev/its-about-ownership/) ⭐️ 7.0/10
 
-该文章指出了一个悖论：能力日益增强的大语言模型（LLM）在工具调用任务（如生成错误语法或编造字段）上的表现反而下降，这对“通用模型改进会带来更好的专用工具集成”这一假设提出了挑战。 这个问题很重要，因为可靠的工具调用是构建实用 AI 代理和开发者工具的基础，其性能下降会直接影响 LLM 驱动的应用程序的成本、延迟和可靠性。 文章指出，在“宽容”运行时环境中训练的模型可能会学会编造接口细节，当与严格的外部系统集成时就会出现问题；而提供清晰的错误指导或使用像`curl`这样的标准化接口等替代方法可以缓解这一问题。
+一篇广为传播的博客文章指出，游戏的核心问题并非实体与数字之争，而是随着行业转向数字发行模式，真正的所有权（如可转让权和永久使用权）正在受到侵蚀。 这场辩论凸显了消费者预期和数字商业领域的关键转变，挑战了游戏行业的订阅制和基于许可的营收模式，并可能影响未来的数字权利立法。 文章强调，数字所有权应包括转售或许可转让的能力，以及永久使用已购内容的权利，而 DRM（数字版权管理）技术常常通过将购买绑定到特定账户或要求在线验证来限制这些行为。
 
-hackernews · leemoore · 7月4日 20:16 · [社区讨论](https://news.ycombinator.com/item?id=48788599)
+hackernews · popcar2 · 7月5日 14:56 · [社区讨论](https://news.ycombinator.com/item?id=48794750)
 
-**背景**: 工具调用（或函数调用）是指大语言模型生成结构化命令（如 API 请求）以与外部工具和服务交互的能力。这种能力对于创建能在现实世界中执行操作（如查询数据库或控制软件）的 AI 代理至关重要。由于模型主要基于海量文本语料库进行训练，它们遵循精确且往往独特的工具特定模式的能力并不一定随其通用推理能力的提升而增强。
+**背景**: 数字版权管理（DRM）指用于控制受版权保护的数字内容访问的技术，通常用于防止复制或未经授权的使用。从实体介质到 Steam 等数字商店的转变，使所有权从有形商品转变为许可协议，用户通常购买的是使用权而非产品本身。这种模式因行业向订阅制和战斗通行证等经常性收入来源的趋势而得到加强。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://dev.to/amartyajha/how-poor-tool-calling-behavior-increases-llm-cost-and-latency-3idf">How Poor Tool Calling Behavior Increases LLM Cost and Latency</a></li>
-<li><a href="https://a16z.com/emerging-architectures-for-llm-applications/">Emerging Architectures for LLM Applications - Andreessen Horowitz</a></li>
-<li><a href="https://www.ibm.com/think/topics/ai-agents">What Are AI Agents ? | IBM</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Digital_rights_management">Digital rights management - Wikipedia</a></li>
+<li><a href="https://www.pcgamingwiki.com/wiki/Digital_rights_management_(DRM)">Digital rights management (DRM) - PCGamingWiki PCGW - bugs, fixes, crashes, mods, guides and improvements for every PC game</a></li>
+<li><a href="https://d3.harvard.edu/rethinking-digital-ownership-rights-governance-and-the-path-forward/">Rethinking Digital Ownership: Rights, Governance, and the Path Forward | Harvard Business School AI Institute</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 开发者们分享了实用的解决方案，强调清晰、有用的错误信息是一种简单有效的修复方法，可以让模型在会话中自我纠正。其他人则主张使用像`curl`命令这样广为人知的标准化接口，而非像 MCP 这样复杂的自定义协议，以实现更可靠的集成。还有评论者指出，这可能会形成一种经济护城河，因为在特定的闭源工具链上对模型进行微调可能会将用户锁定在特定的生态系统中。
+**社区讨论**: 社区讨论显示出对立法监管以保障真正数字所有权的强烈支持，许多评论者认为已购内容应可转让且不可撤销。一个反复出现的主题是，像破解补丁这样的技术变通方法往往是保存访问权的唯一可靠途径，并且人们感到沮丧的是，行业整合和商业模式的变化使得公司对消费者的反对意见越来越不敏感。
 
-**标签**: `#LLM`, `#tool-calling`, `#software-engineering`, `#AI-agents`, `#developer-tools`
+**标签**: `#digital-ownership`, `#gaming`, `#DRM`, `#consumer-rights`, `#software-licensing`
 
 ---
 
 <a id="item-4"></a>
-## [报告揭示 LLM 用户账户间潜在会话数据泄露风险](https://github.com/anthropics/claude-code/issues/74066) ⭐️ 8.0/10
+## [新模拟器分支使 Windows 2000 能在 DEC Alpha 硬件上运行。](https://raymii.org/s/blog/Run_Windows_2000_for_Dec_Alpha_on_a_new_es40_fork.html) ⭐️ 7.0/10
 
-一个 GitHub 问题和 Hacker News 上的讨论揭示了社区用户关于 Claude 和 GPT 等主要 LLM 平台在不同用户账户之间可能交换或泄露会话或缓存数据的报告。该问题详细描述了 API 基础设施据称导致响应混淆的具体案例。 这之所以重要，是因为它对快速增长的多租户 LLM 行业提出了关键的安全和隐私担忧，如果敏感数据可能跨越组织边界泄露，可能会侵蚀用户信任。此类事件可能影响企业采用，并要求提供商实施更严格的数据隔离协议。 尽管这些报告基于用户轶事且尚未被官方确认为广泛存在的漏洞，但 Claude Code 团队的一名成员回应称，他们确信所报告的具体事件是幻觉，但团队正在调查。讨论中提到了可能的原因，例如 API 网关在处理 HTTP 状态码时出现错误或缓存冲突。
+es40 模拟器的一个新分支已发布，成功在 DEC Alpha 架构上运行了 Windows 2000 操作系统。 这一成就重新唤起了人们对遗留计算系统的兴趣，并展示了持续模拟和保存那些已非主流的历史硬件与软件组合的能力。 该模拟环境专门针对 DEC Alpha 架构（一种 64 位 RISC 处理器），使用了 es40 模拟器分支，这是一个托管在 GitHub 等平台上的开源项目。
 
-hackernews · chatmasta · 7月4日 14:03 · [社区讨论](https://news.ycombinator.com/item?id=48785485)
+hackernews · jandeboevrie · 7月5日 13:47 · [社区讨论](https://news.ycombinator.com/item?id=48794302)
 
-**背景**: 大型语言模型（LLM）提供商通常部署多租户架构，其中单个基础设施为许多用户或组织提供服务，因此正确的数据隔离是一项基本的安全要求。像提示缓存这样的技术被用于提升性能，但如果实施时没有严格的租户边界，它们可能会带来数据泄露风险。确保一个客户的数据或上下文绝不会渗入另一个客户的会话，是生产级 LLM 系统设计中关键且不容妥协的方面。
+**背景**: DEC Alpha 是数字设备公司在 20 世纪 90 年代初开发的一种高性能 64 位 RISC 架构，以其先进设计而闻名。Windows 2000 是微软 Windows NT 系列的一部分，最初有 Alpha 版本，但后来停止了支持。es40 模拟器旨在模拟 AlphaServer ES40 系统，允许 OpenVMS 等遗留软件在现代硬件上运行。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://medium.com/@michael.hannecke/llm-prompt-caching-what-you-should-know-2665d76d3d8d">LLM Prompt Caching: Performance and Security Guide | Medium</a></li>
-<li><a href="https://www.thedataexperts.us/work/secure-multi-tenant-llm-platform-framework.html">Secure Multi-Tenant LLM Platform: A Build-and-Transfer…</a></li>
-<li><a href="https://aws.amazon.com/blogs/machine-learning/multi-tenant-llm-analytics-with-row-level-security-how-we-built-a-secure-agent-on-aws/">Multi-tenant LLM analytics with row-level security: How we built a secure agent on AWS | Artificial Intelligence</a></li>
+<li><a href="https://github.com/ES40-Emu/es40">GitHub - ES 40 - Emu / es 40 : AlphaServer ES 40 emulator · GitHub</a></li>
+<li><a href="https://www.stromasys.com/resources/the-dec-alpha-processor-a-comprehensive-overview/">Understanding DEC Alpha : Architecture & Modern Solutions</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Windows_2000">Windows 2000 - Wikipedia</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区讨论在怀疑和担忧之间存在分歧；一些用户认为报告很可能是幻觉或上下文相关的产物，而另一些用户则分享了佐证性的个人经历，称看到过异常的、脱离上下文的、似乎本应发给其他用户的回复。Claude Code 团队的一名成员正式回应澄清他们正在调查，但倾向于将特定报告解释为幻觉。
+**社区讨论**: 社区的反应融合了怀旧和技术好奇心，用户们分享了在专业和学术环境中使用 DEC Alpha 和 Windows 2000 的个人回忆。一些评论反思了 Alpha 架构的历史意义，以及看到它在现代 x86_64 硬件上被模拟的惊讶；另一些人则欣赏旧版 Windows 2000 功能性且简洁的界面。
 
-**标签**: `#AI/ML security`, `#LLM infrastructure`, `#data privacy`, `#system reliability`
+**标签**: `#emulation`, `#retrocomputing`, `#DEC Alpha`, `#Windows 2000`, `#legacy-systems`
 
 ---
 
 <a id="item-5"></a>
-## [AI 模型 Claude Fable 驱动 sqlite-utils 4.0rc2 发布](https://simonwillison.net/2026/Jul/5/sqlite-utils-fable/#atom-everything) ⭐️ 8.0/10
+## [更新的 Claude 模型在自定义工具模式上表现更差](https://simonwillison.net/2026/Jul/4/better-models-worse-tools/#atom-everything) ⭐️ 7.0/10
 
-Simon Willison 使用 Claude Fable 对 sqlite-utils 4.0rc1 进行了最终代码审查，在 37 个提示和 34 次提交中识别出 5 个“阻碍发布”的错误，从而促成了 4.0rc2 版本的发布。 这展示了 AI 在现实开源软件发布流程中一种实际且高性价比的应用，可能验证了 AI 作为高风险代码审查和错误发现工具的价值。 整个过程涉及 30 个文件、+1321 行和-190 行的代码修改，并且发现了一个关键错误：`delete_where()`会污染数据库连接，可能导致数据丢失。
+开发者 Armin Ronacher 发现，最新的 Claude 模型（Opus 4.8、Sonnet 5）在遵循特定工具的 JSON 模式方面比旧模型表现更差，因为它们会在'edits[]'数组中凭空添加额外字段，导致工具调用被拒绝。 这是一个违反直觉的退步，给构建工具使用 AI 系统的开发者带来了重大的实际问题，因为更新、更强大的模型在自定义集成方面可能表现更差，影响了 API 设计和模型评估策略。 作者推测，这个问题源于更新的 Anthropic 模型被专门训练（可能通过强化学习）以更好地使用 Claude Code 中内置的编辑工具，但这无意中损害了它们在使用 Pi 等第三方工具中的替代自定义编辑工具时的表现。
 
-rss · Simon Willison · 7月5日 01:00
+rss · Simon Willison · 7月4日 22:53
 
-**背景**: sqlite-utils 是一个用于操作 SQLite 数据库的流行 Python 库和命令行工具。语义化版本控制（SemVer）是一种版本管理方案，其中主版本号的增加表示不兼容的 API 更改，这使得主版本发布对维护者而言意义重大且不常见。Claude Fable 是 Anthropic 公司推出的先进 AI 模型。
+**背景**: 现代大语言模型可以通过生成符合所提供模式的结构化 JSON 调用来使用'工具'。Claude 内置的编辑工具使用搜索和替换机制，而 OpenAI 的 Codex 则使用 apply_patch 机制。像 Pi 这样的工具是开源、极简的编码代理，依赖简单的内置工具（读、写、编辑、bash）并向大语言模型暴露自定义的工具模式。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://semver.org/">Semantic Versioning 2.0.0 | Semantic Versioning</a></li>
-<li><a href="https://github.com/simonw/sqlite-utils">GitHub - simonw/sqlite-utils: Python CLI utility and library ...</a></li>
-<li><a href="https://www.anthropic.com/claude/fable">Claude Fable \ Anthropic</a></li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/structured-outputs">Structured outputs - Claude Platform Docs</a></li>
+<li><a href="https://realpython.com/ref/ai-coding-tools/pi/">Pi | AI Coding Tools – Real Python</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI-assisted development`, `#SQLite`, `#open-source`, `#software release`, `#Claude AI`
+**标签**: `#LLM`, `#Tool Use`, `#API Design`, `#Model Behavior`, `#Software Engineering`
 
 ---
 
 <a id="item-6"></a>
-## [GPT-5.5 Codex 性能回归可追溯至 516 个推理 token 的聚类问题。](https://github.com/openai/codex/issues/30364) ⭐️ 7.0/10
+## [港大教授创立的忆生科技获数亿融资，研发机器人记忆系统](https://36kr.com/p/3882365879005186?f=rss) ⭐️ 7.0/10
 
-用户发现 GPT-5.5 Codex 存在一个可重现的性能回归问题，模型的推理过程会在恰好 516 个 token 处聚类，导致输出错误。当模型使用显著更多的思考 token（6000-8000 个）时，则会返回正确结果。 此问题削弱了一个主要 AI 编程助手的可靠性，直接影响开发者的生产力和对自动编程工具的信任。它凸显了大型语言模型一致性面临的持续挑战，以及商业 AI 服务中无声、服务器端变更的风险。 该回归似乎与一种“自适应思考”机制有关，其中短推理路径会产生错误答案，而长路径才是正确的。一些用户报告称，此问题已持续数月，他们已转而使用 Claude 等替代模型作为变通方案。
+香港大学教授马毅创立的忆生科技完成了数亿元的天使轮融资，用于开发基于“感知—预测—交互”闭环的机器人“大脑+小脑”统一记忆系统。 该方法旨在通过实现基于闭环交互学习的可解释自主智能，克服当前大型 AI 模型的关键局限（如“幻觉”和缺乏物理世界自我纠错能力），可能彻底改变机器人技术和具身智能领域。 据报道，该初创公司的架构在多任务平均表现上比传统视觉-语言-动作（VLA）模型提升 3 倍以上，成功率超过 95%，且其核心记忆机制与具体机器人本体解耦，支持跨不同机器人身体的技能迁移。
 
-hackernews · maille · 7月4日 21:51 · [社区讨论](https://news.ycombinator.com/item?id=48789428)
+rss · 36kr - AI · 7月5日 06:27
 
-**背景**: OpenAI Codex 是一个旨在生成代码的 AI 系统，其性能通常通过输出的准确性和效率来衡量。此处的 token 聚类很可能指模型为任务分配了固定但可能非最优数量的计算“思考”token。此类工具中的性能回归可能由内部模型更新或推理基础设施的变更引起。
+**背景**: “感知—预测—交互”循环是机器人领域的一个闭环框架，它通过循环进行感知处理、未来状态预测和交互决策来模拟生物学习。忆生科技的愿景针对了当前大型模型的一个常见批评：它们如同在封闭世界中训练的静态“百科全书”，缺乏在动态物理环境中自我验证和纠错的能力，从而导致错误或“幻觉”。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://news.ycombinator.com/item?id=48749961">Codex reasoning - token clustering at 516 may be... | Hacker News</a></li>
-<li><a href="https://community.openai.com/t/severe-regression-in-gpt-5-codex-performance/1358412">Severe regression in GPT-5 Codex performance - Codex - OpenAI ...</a></li>
-<li><a href="https://github.com/openai/codex/issues/6835">Significant Performance Regression in Codex from v0.4.39 ...</a></li>
+<li><a href="https://www.emergentmind.com/topics/perception-prediction-planning-loop">Perception - Prediction -Planning Loop</a></li>
+<li><a href="https://eu.36kr.com/en/p/3882365879005186">Hard Krypton Exclusive: HKU Professor-Founded MemSmart Secures...</a></li>
+<li><a href="https://arxiv.org/html/2510.04978">Aligning Perception , Reasoning, Modeling and Interaction : A Survey...</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区确认该回归问题易于重现，许多人报告质量每天都有波动，并且由于 OpenAI 缺乏回应，他们已经转向 Claude 等替代品。一些人将其与竞争产品过去的回归问题相比较，并讨论采用按 token 计费或本地模型来避免此类无声的服务器端问题。
-
-**标签**: `#GPT-5.5`, `#AI coding`, `#performance regression`, `#OpenAI Codex`, `#LLM reliability`
+**标签**: `#AI robotics`, `#embodied intelligence`, `#startup funding`, `#computer vision`, `#autonomous systems`
 
 ---
 
 <a id="item-7"></a>
-## [USAF：在消费级 GPU 上对 MoE 模型进行开源稀疏微调](https://www.reddit.com/r/MachineLearning/comments/1unl62q/if_your_gpu_can_run_inference_it_should_be_able/) ⭐️ 7.0/10
+## [清华系光象科技获数亿元融资，押注物理原生具身智能机器人](https://36kr.com/p/3882364132077577?f=rss) ⭐️ 7.0/10
 
-一种名为 USAF 的新开源方法通过仅训练专家权重和路由器，实现了在拥有 12GB 显存的消费级 AMD GPU 上对大型混合专家模型进行微调。 该方法显著降低了对大型先进 MoE 模型进行微调的硬件门槛，可能使缺乏企业级硬件的研究人员和开发者也能进行模型定制，从而推动民主化。 该项目以 Apache 2.0 许可证发布，专门针对稀疏专家权重和路由器进行训练，这与常见的基于适配器（如 LoRA）的方法有所不同。
+由清华大学师生创立的具身智能公司光象科技已完成累计数亿元天使轮融资，资金将用于研发物理原生基座模型并推动工业机器人的商业化交付。 这笔巨额融资及其独特的技术路线可能加速更通用的工业自动化机器人系统发展，特别是解决汽车制造中现有自动化（如机械臂）无法完成的剩余 30%任务。 该公司的“物理原生基座模型”技术路线以强化学习为核心，与主流的 VLA 和视频预测模型不同，旨在让机器人通过交互自主学习物理规律，而非仅仅模仿人类演示。
 
-reddit · r/MachineLearning · /u/tsuyu122 · 7月4日 21:56
+rss · 36kr - AI · 7月5日 06:25
 
-**背景**: 混合专家（MoE）模型采用稀疏架构，其中路由器网络为每个输入选择一部分专业化的专家子网络（即“专家”），从而在保持计算可控的同时实现巨大的总参数量。对此类模型进行微调颇具挑战，因为标准技术通常需要更新所有参数或在整个密集结构上添加适配器。USAF 方法专注于仅更新专家权重和路由器本身，利用模型固有的稀疏性来降低内存和计算需求。
+**背景**: 具身智能旨在赋予智能体在物理世界中感知、推理和行动的能力。主流方法包括通过人类演示数据将视觉和语言映射到动作的 VLA 模型，以及模拟像素级结果的视频预测世界模型。光象科技的物理原生路线旨在通过让机器人在仿真中试错学习，来克服这些方法在泛化能力和物理理解方面的局限性。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://huggingface.co/blog/moe">Mixture of Experts Explained</a></li>
-<li><a href="https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts">A Visual Guide to Mixture of Experts (MoE)</a></li>
-<li><a href="https://www.ibm.com/think/topics/mixture-of-experts">What is mixture of experts? | IBM</a></li>
+<li><a href="https://arxiv.org/html/2605.00412">Physically Native World Models : A Hamiltonian Perspective on...</a></li>
+<li><a href="https://www.pi.website/">Physical Intelligence (π)</a></li>
+<li><a href="https://github.com/keewillidevnet/cosmos-semiconductor-physics">keewillidevnet/cosmos-semiconductor-physics: Physics - native ...</a></li>
 
 </ul>
 </details>
 
-**标签**: `#Mixture-of-Experts`, `#Fine-tuning`, `#Open-Source`, `#GPU-Inference`, `#Machine-Learning`
+**标签**: `#embodied AI`, `#robotics`, `#startup funding`, `#reinforcement learning`, `#foundation models`
 
 ---
 
 <a id="item-8"></a>
-## [同人社区因 AI 检测方法及误判问题陷入分裂。](https://www.theverge.com/tech/960854/ai-fanfiction-ao3-claude-detector) ⭐️ 6.0/10
+## [博士生质疑内在动机研究在机器人技术进展下的可行性](https://www.reddit.com/r/MachineLearning/comments/1uo5kg6/is_intrinsic_motivation_a_viable_phd_topic_in/) ⭐️ 7.0/10
 
-同人社区内出现了一场新运动，旨在识别并排斥使用 Claude 和 ChatGPT 等生成式 AI 工具的作者，但其正在实施的检测方法存在疑问，可能导致对人类作者的误判。 这场冲突凸显了在保护人类创造力和采用新技术之间的紧张关系，存在缺陷的检测工具可能会压制合法的作者，并损害创作社区内部的信任。 社区的反应已导致内部分裂，因为对 Claude 和 ChatGPT 等 AI 工具的广泛抵制是通过容易出错的检测方法强制执行的，这意味着任何同人作者都可能被错误指控。
+一位专注于内在动机和无监督强化学习的一年级博士生在 Reddit 上发帖，质疑他们的研究课题在 2026 年是否仍然可行，因为监督式奖励调优和行为克隆在机器人领域取得了令人瞩目的成果。 这个问题凸显了 AI/ML 研究人员面临的一个关键战略关切，它将一个理论上优雅但历史上应用有限的方法与当前占主导地位、且已被证明有效的范式进行对比，影响着博士选题、资金流向和未来的职业前景。 该学生的具体担忧是，内在动机方法（如赋能、好奇心模块和随机网络蒸馏）基本上局限于简单的模拟机器人任务，而最先进的现实世界机器人演示则严重依赖监督技术，这让人对 IM 的实际必要性以及该博士学位的就业前景产生了怀疑。
 
-rss · The Verge - AI · 7月4日 12:00
+reddit · r/MachineLearning · /u/soup---- · 7月5日 15:50
 
-**背景**: 生成式 AI 可以创建文本、代码和图像，AI 检测工具使用分析文本模式或统计可能性等方法来猜测内容是否为机器生成，但它们常常面临误判问题——错误地将人类作品标记为 AI 创作。以 Archive of Our Own (AO3)等平台为中心的同人社区重视原创的人类表达，因此 AI 的引入成为了重大的文化和伦理冲突点。
+**背景**: 强化学习中的内在动机（IM）是一种受心理学启发的研究范式，旨在为智能体创建内部奖励信号，使其能够在没有特定任务监督的情况下进行探索和学习通用技能。这与当前占主导地位的监督式奖励调优或行为克隆方法形成对比，后者通过遵循精心设计的奖励函数或模仿人类演示来让机器人学习，并已在此前驱动了复杂机器人操作和运动领域的重大突破。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.grammarly.com/blog/ai/how-do-ai-detectors-work/">How Do AI Detectors Work? Key Methods and Limitations | Grammarly</a></li>
-<li><a href="https://lawlibguides.sandiego.edu/c.php?g=1443311&p=10721367">The Problems with AI Detectors: False Positives and False Negatives - Generative AI Detection Tools - Guides at University of San Diego Legal Research Center</a></li>
+<li><a href="https://web.eecs.umich.edu/~baveja/Papers/IMRLIEEETAMDFinal.pdf">Intrinsically Motivated Reinforcement Learning</a></li>
+<li><a href="https://arxiv.org/pdf/1908.06976">A survey on intrinsic motivation in reinforcement learning</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI ethics`, `#creative writing`, `#content detection`, `#community conflict`, `#generative AI`
+**社区讨论**: 该 Reddit 帖子引发了大量讨论，观点多样，包括认为内在动机研究对于构建通用智能体仍有价值的观点、对其当前实际应用局限性和狭窄应用领域的担忧，以及关于在博士期间如何平衡小众专业知识与更广泛、更实用技能的建议。
+
+**标签**: `#ReinforcementLearning`, `#ResearchDirections`, `#PhDAdvice`, `#AIAlignment`, `#UnsupervisedRL`
 
 ---
 
 <a id="item-9"></a>
-## [半导体与 AI 浪潮推动国产含氟新材料进入高速成长期](https://36kr.com/newsflashes/3882063262068998?f=rss) ⭐️ 6.0/10
+## [一名学生为突尼斯阿拉伯方言构建了开源机器翻译流程和语料库。](https://www.reddit.com/r/MachineLearning/comments/1uo92vz/i_built_an_open_fromscratch_mt_pipeline_parallel/) ⭐️ 7.0/10
 
-光大证券研报指出，国内氟化工领军企业正加速布局电子级氢氟酸和 AI 液冷用冷却液等高附加值含氟新材料，打造第二增长曲线。 这一转型意义重大，它使国内企业得以打破在半导体关键供应链上的国外垄断，并使其能够把握 AI 和高性能计算数据中心对先进热管理解决方案快速增长的需求。 国内企业已突破 G5 级电子氢氟酸的超净高纯工艺瓶颈，纯度达到 PPT 级并通过一线晶圆厂认证；同时，氟化工企业正积极布局全氟聚醚（PFPE）冷却液，因其优异的绝缘和热管理性能，成为浸没式液冷系统中不可或缺的材料。
+一名 18 岁的独立学生创建了一个从零开始的、开放的机器翻译流程以及一个正在扩充的突尼斯阿拉伯方言（使用阿拉伯数字混合书写）平行语料库，其中包括一个定制的、感知阿拉伯数字混合书写的 SentencePiece BPE 分词器和一个编码器-解码器 Transformer 模型。 该项目通过提供一个开源的基线和社区驱动的数据收集与模型改进框架，解决了突尼斯阿拉伯方言（一种具有独特书写挑战的低资源语言）在开放 NLP 资源方面的严重缺口。 该模型在小型测试集上的初始 BLEU 评分为 3.89，创建者坦诚地承认这是一个较低的基线，并将其主要归因于仅有 553 个手工制作的句子对的极小数据集规模，而非模型架构问题。
 
-rss · 36kr - AI · 7月5日 01:18
+reddit · r/MachineLearning · /u/Dhiadev-tn · 7月5日 18:08
 
-**背景**: 电子级氢氟酸是芯片制造中不可或缺的湿电子化学品，G5 是其最高纯度标准。浸没式液冷是一种先进的热管理技术，将部件浸没在不导电的液体中进行散热；随着传统风冷方案的效能达到极限，该技术对高功率 AI 芯片和数据中心的散热变得至关重要。
+**背景**: 突尼斯阿拉伯方言是一种通常用阿拉伯数字混合书写（Arabizi）的阿拉伯方言，该书写系统使用拉丁字母和数字（如 3, 7, 9）来表示阿拉伯语音素，现有的阿拉伯语 NLP 工具通常无法正确处理这种书写方式，而是将其导向现代标准阿拉伯语。SentencePiece BPE 是一种子词分词方法，将文本分割成常见的子词单元；在这里，创建者对其进行了定制，以保护阿拉伯数字混合书写中独特的表示音素的数字。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.toutiao.com/article/7644957391921873427/">半导体“工业味精”G5级氢氟酸：硬核技术壁垒与国产替代</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/1945118179559998489">全氟碳化合物（如全氟聚醚PFPE）作为浸没式液冷系统的核心冷却液</a></li>
-<li><a href="https://www.eet-china.com/mp/a480686.html">2026最新湿电子化学品产业发展报告深度解读（建议收藏）</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Arabic_chat_alphabet">Arabic chat alphabet - Wikipedia</a></li>
+<li><a href="https://github.com/google/sentencepiece">GitHub - google/ sentencepiece : Unsupervised text tokenizer for...</a></li>
 
 </ul>
 </details>
 
-**标签**: `#semiconductor`, `#materials-science`, `#AI-infrastructure`, `#industry-analysis`, `#fluorochemistry`
+**社区讨论**: Reddit 上的帖子引发了积极的讨论，用户们认可了该项目为边缘语言创建资源的价值，并赞赏创建者对模型局限性和诚实基线的透明度。
+
+**标签**: `#NLP`, `#machine-translation`, `#low-resource-languages`, `#open-source`, `#corpus-creation`
 
 ---
 
 <a id="item-10"></a>
-## [美光科技投资 93 亿美元扩建广岛工厂，生产 AI 存储芯片](https://36kr.com/newsflashes/3882061184413701?f=rss) ⭐️ 6.0/10
+## [仅用 445 字节压缩数据生成 ASCII 世界地图](https://simonwillison.net/2026/Jul/4/building-a-world-map-with-only-500-bytes/#atom-everything) ⭐️ 6.0/10
 
-美光科技已启动其日本广岛工厂的一项总额达 1.5 万亿日元（约合 93 亿美元）的扩建工程，旨在生产包括用于人工智能应用的高带宽存储器（HBM）在内的先进存储芯片，预计首批出货时间在 2028 年夏季左右。 这项重大投资直接支持了全球人工智能硬件供应链，因为高带宽存储器是英伟达等公司高性能 AI 处理器的关键组件，这也反映了美光、三星、SK 海力士等存储巨头为满足 AI 热潮而激烈扩张产能的竞争态势。 该项目总投资额为 1.5 万亿日元（约 93 亿美元），广岛工厂将专门生产对 AI 加速器至关重要的高带宽存储器；此消息发布前不久，SK 海力士也公布了在韩国清州投资 514.6 亿美元新建一座 NAND 存储芯片工厂的计划。
+开发者 Iwo Kadziela 利用 445 字节的 deflate 压缩数据生成了一个可识别的 ASCII 世界地图，展示了一种使用 JavaScript 的 `fetch()` 函数和 `DecompressionStream` API 解码 Base64 数据 URI 的新技术。 这个项目展示了一种高效且富有创意的方法，能够在极小的数据体积内嵌入丰富的视觉内容，体现了现代 Web API 在浏览器内进行解压缩和渲染的强大能力。 该技术使用了不带 zlib 头的 'deflate-raw' 压缩算法，并利用了作为现代 Web Streams API 一部分的 `DecompressionStream` 接口进行即时解压。整个地图以 Base64 编码的数据 URI 形式存储，使其可以完全在客户端获取和处理。
 
-rss · 36kr - AI · 7月5日 01:16
+rss · Simon Willison · 7月4日 23:09
 
-**背景**: 高带宽存储器（HBM）是一种高性能存储器接口，它通过硅通孔（TSV）技术将动态随机存取存储器（DRAM）芯片进行三维堆叠，以实现远高于传统存储器的带宽和能效，这对人工智能和高性能计算至关重要。目前，主要的存储芯片制造商正处在一个激烈的投资周期中，旨在扩大先进产能，以满足人工智能应用带来的飙升需求。
+**背景**: deflate 算法是一种广泛使用的无损数据压缩标准，它结合了 LZ77 和霍夫曼编码。数据 URI 是一种方案，允许将数据直接嵌入文档中，以前缀 'data:' 开头，而不是链接到外部文件。Fetch API 是一个用于发起网络请求的现代 JavaScript 接口，在此创意性地用于解码嵌入式的数据 URI。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://theoutpost.ai/news-story/micron-technology-breaks-ground-on-9-3-billion-hiroshima-plant-expansion-for-ai-memory-chips-28213/">Micron Technology $9.3B Hiroshima Plant Expansion</a></li>
-<li><a href="https://en.wikipedia.org/wiki/High_Bandwidth_Memory">High Bandwidth Memory - Wikipedia</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/DecompressionStream">DecompressionStream - Web APIs | MDN</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data">data : URLs - URIs | MDN</a></li>
 
 </ul>
 </details>
 
-**标签**: `#semiconductors`, `#HBM`, `#AI hardware`, `#investment`, `#manufacturing`
+**社区讨论**: 此新闻条目未提供社区讨论评论。
+
+**标签**: `#data-compression`, `#javascript`, `#ascii-art`, `#web-development`, `#demo`
 
 ---
