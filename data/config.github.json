@@ -27,15 +27,15 @@
       },
       {
         "type": "repo_releases",
-        "owner": "vercel",
-        "repo": "next.js",
+        "owner": "google",
+        "repo": "gemma",
         "enabled": true
       }
     ],
     "hackernews": {
       "enabled": true,
       "fetch_top_stories": 30,
-      "min_score": 100
+      "min_score": 80
     },
     "rss": [
       {
@@ -45,16 +45,52 @@
         "category": "ai-tools"
       },
       {
-        "name": "GitHub Trending - Daily",
-        "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
-        "enabled": true,
-        "category": "github-trending"
-      },
-      {
         "name": "OpenAI Blog",
         "url": "https://openai.com/blog/rss.xml",
         "enabled": true,
         "category": "ai-news"
+      },
+      {
+        "name": "Google AI Blog",
+        "url": "https://blog.google/technology/ai/rss/",
+        "enabled": true,
+        "category": "ai-news"
+      },
+      {
+        "name": "The Verge - AI",
+        "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+        "enabled": true,
+        "category": "ai-news"
+      },
+      {
+        "name": "The Verge - Gaming",
+        "url": "https://www.theverge.com/rss/games/index.xml",
+        "enabled": true,
+        "category": "gaming"
+      },
+      {
+        "name": "IGN",
+        "url": "https://feeds.feedburner.com/ign/games-all",
+        "enabled": true,
+        "category": "gaming"
+      },
+      {
+        "name": "Nintendo Everything",
+        "url": "https://nintendoeverything.com/feed/",
+        "enabled": true,
+        "category": "gaming"
+      },
+      {
+        "name": "Push Square (PlayStation)",
+        "url": "https://www.pushsquare.com/feeds/latest",
+        "enabled": true,
+        "category": "gaming"
+      },
+      {
+        "name": "36kr - AI",
+        "url": "https://36kr.com/feed",
+        "enabled": true,
+        "category": "ai-news-zh"
       }
     ],
     "reddit": {
@@ -77,12 +113,44 @@
           "min_score": 50
         },
         {
-          "subreddit": "webdev",
+          "subreddit": "artificial",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 30
+        },
+        {
+          "subreddit": "gaming",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 100
+        },
+        {
+          "subreddit": "NintendoSwitch",
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
           "fetch_limit": 8,
-          "min_score": 30
+          "min_score": 50
+        },
+        {
+          "subreddit": "PS5",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 8,
+          "min_score": 50
+        },
+        {
+          "subreddit": "soccer",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 100
         }
       ],
       "users": [],
@@ -90,17 +158,21 @@
     }
   },
   "filtering": {
-    "ai_score_threshold": 6.0,
+    "ai_score_threshold": 5.5,
     "time_window_hours": 24,
-    "max_items": 20,
+    "max_items": 25,
     "category_groups": {
       "ai": {
-        "limit": 8,
-        "categories": ["ai-news", "ai-tools", "machine-learning"]
+        "limit": 10,
+        "categories": ["ai-news", "ai-tools", "ai-news-zh", "machine-learning"]
       },
-      "dev": {
-        "limit": 5,
-        "categories": ["github-trending", "webdev"]
+      "gaming": {
+        "limit": 6,
+        "categories": ["gaming"]
+      },
+      "sports": {
+        "limit": 4,
+        "categories": ["sports", "soccer"]
       }
     },
     "default_group": "other",
