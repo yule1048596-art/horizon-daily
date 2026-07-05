@@ -5,155 +5,244 @@ date: 2026-07-05
 lang: en
 ---
 
-> From 28 items, 6 important content pieces were selected
+> From 66 items, 10 important content pieces were selected
 
 ---
 
-1. [Potential Session/Cache Leakage Between AI User Accounts Reported](#item-1) ⭐️ 9.0/10
-2. [GPT-5.5 Codex Performance Degraded by Reasoning-Token Clustering Issue](#item-2) ⭐️ 8.0/10
-3. [$200K Bounty Offered to Digitize All Books from Google Books or Similar Services](#item-3) ⭐️ 8.0/10
-4. [Claude AI reviews sqlite-utils for $149.25, finds critical bugs before stable release.](#item-4) ⭐️ 8.0/10
-5. [Open-source USAF method enables MoE fine-tuning on consumer GPUs](#item-5) ⭐️ 8.0/10
-6. [BaryGraph: A Knowledge Graph Where Relationships Are Embedded Documents, Not Edges](#item-6) ⭐️ 8.0/10
+1. [Huawei releases V2 of Tao's Law paper with engineering details and test data.](#item-1) ⭐️ 9.0/10
+2. [Prompt Injection Bug in YouTube AI Could Leak Creators' Private Videos](#item-2) ⭐️ 8.0/10
+3. [More Capable Language Models May Perform Worse at Tool Calling](#item-3) ⭐️ 8.0/10
+4. [Potential Session Data Leakage Reported Between LLM User Accounts](#item-4) ⭐️ 8.0/10
+5. [AI Model Claude Fable Drives sqlite-utils 4.0rc2 Release](#item-5) ⭐️ 8.0/10
+6. [GPT-5.5 Codex regression traced to reasoning-token clustering at 516.](#item-6) ⭐️ 7.0/10
+7. [USAF: Open-Source Sparse Fine-Tuning for MoE Models on Consumer GPUs](#item-7) ⭐️ 7.0/10
+8. [Fanfiction community splits over AI detection methods and false accusations.](#item-8) ⭐️ 6.0/10
+9. [Semiconductor and AI Trends Drive Growth for Chinese Fluorine New Materials](#item-9) ⭐️ 6.0/10
+10. [Micron Invests $9.3 Billion to Expand Hiroshima Plant for AI Memory Chips](#item-10) ⭐️ 6.0/10
 
 ---
 
 <a id="item-1"></a>
-## [Potential Session/Cache Leakage Between AI User Accounts Reported](https://github.com/anthropics/claude-code/issues/74066) ⭐️ 9.0/10
+## [Huawei releases V2 of Tao's Law paper with engineering details and test data.](https://36kr.com/newsflashes/3880931591254019?f=rss) ⭐️ 9.0/10
 
-A security report has emerged on GitHub detailing a potential vulnerability where AI model providers like Anthropic and OpenAI may be leaking sessions or cache data between different user workspace instances or consumer accounts. This issue is significant because it could expose private user data and conversations, undermining trust in major AI platforms and raising serious concerns about the security of multi-tenant AI infrastructure used by millions. The report is based on user accounts of observed anomalies, including one developer's detailed account of a Claude API gateway incorrectly handling HTTP 100 status codes, which caused an off-by-one error leading to response swapping.
+Huawei's semiconductor head He Tingbo released Version 2 of the 'Tao's Law' paper, which adds extensive engineering implementation details, real-world quantitative data, and a production roadmap for the time constant (τ) scaling theory. The update introduces the 'LogicFolding' technique with its 'gear ratio' concept for 3D chip design and provides specific performance parameters for the Kirin 2026 chip. This update strengthens Huawei's proposed paradigm shift for post-Moore's Law semiconductor scaling by moving from theoretical framework to practical engineering validation with real chip data, potentially guiding a new architectural path for advanced chip design. It presents a concrete roadmap for next-generation chips, challenging the industry's traditional reliance on geometric scaling. A key technical detail is the 'LogicFolding' architecture, which uses a 'gear ratio' to optimize vertical logic partitioning, shifting 3D design from 'macro-block-level discrete optimization' to 'unit-level continuous optimization' when hybrid bonding pitch approaches top-metal routing dimensions. The paper includes a new data table for the Kirin 2026 chip, specifying voltage, frequency, normalized power consumption, area, and power density parameters against a Kirin 9030 Pro baseline.
 
-hackernews · chatmasta · Jul 4, 14:03 · [Discussion](https://news.ycombinator.com/item?id=48785485)
+rss · 36kr - AI · Jul 4, 06:35
 
-**Background**: Multi-tenant AI infrastructure allows multiple users to share the same underlying computational resources, including large language models (LLMs) like Claude and GPT. In such systems, maintaining strict data isolation between different user sessions and preventing cache collisions is a critical security requirement to protect privacy.
+**Background**: Moore's Law, the observation that the number of transistors on a chip doubles approximately every two years, has guided the semiconductor industry for decades but is approaching physical and economic limits. The 'Tao's Law' is Huawei's proposed alternative framework for post-Moore scaling, using the time constant (τ) as a new universal metric to optimize system performance across hierarchical levels, from devices to entire systems. LogicFolding is a 3D chip design technique that vertically stacks active logic layers using through-silicon vias and hybrid bonding to shorten signal paths, reducing delay and power consumption.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://securityish.com/security_brief/prompt-leakage-risks-in-multi-tenant-llm-serving-identified-by-researchers/">Prompt Leakage Risks in Multi - Tenant LLM Serving Identified by...</a></li>
-<li><a href="https://isuruig.medium.com/multi-tenant-ai-infrastructure-the-5-isolation-layers-that-determine-whether-your-customers-data-340aaeef4922">Multi - Tenant AI Infrastructure: The 5 Isolation Layers That... | Medium</a></li>
-<li><a href="https://mixbanana.medium.com/when-multi-tenant-isolation-completely-falls-apart-2b969110d400">When Multi-Tenant Isolation Completely Falls Apart | by MixBanana - Medium</a></li>
+<li><a href="https://www.huawei.com/en/news/2026/5/ieee-iscas-tau-scaling">HUAWEI Presents the Tau (τ) Scaling Law, Enabling ...</a></li>
+<li><a href="https://d-sci.org/index.php/dsci/article/view/40">A Formal Investigation of Tau (τ) Scaling Theory for Multi ...</a></li>
+<li><a href="https://www.tomshardware.com/tech-industry/semiconductors/peking-university-builds-3d-chip-design-tool-tailored-to-huaweis-logicfolding-architecture">Chinese university builds 3 D chip design tool... | Tom's Hardware</a></li>
 
 </ul>
 </details>
 
-**Discussion**: The community discussion shows high engagement, with some users corroborating similar experiences (e.g., on Gemini) and providing technical explanations, while others, including a team member from Claude Code, suggest the incidents were likely hallucinations due to large context windows rather than actual data leakage.
-
-**Tags**: `#AI security`, `#privacy`, `#LLM vulnerabilities`, `#infrastructure`, `#API safety`
+**Tags**: `#semiconductor`, `#chip-design`, `#3D-stacking`, `#Huawei`, `#post-Moore-Law`
 
 ---
 
 <a id="item-2"></a>
-## [GPT-5.5 Codex Performance Degraded by Reasoning-Token Clustering Issue](https://github.com/openai/codex/issues/30364) ⭐️ 8.0/10
+## [Prompt Injection Bug in YouTube AI Could Leak Creators' Private Videos](https://javoriuski.com/post/youtube) ⭐️ 8.0/10
 
-A GitHub issue reports that GPT-5.5 Codex's internal reasoning process may be prematurely terminating or clustering at specific fixed token boundaries (like 516 tokens), leading to degraded performance and incorrect outputs for complex tasks. This issue is significant because it represents a reproducible performance regression in a widely-used AI coding tool, directly impacting developer productivity and eroding trust in the model's reliability for critical coding tasks. The regression is characterized by the model sometimes 'short-circuiting' at around 516 thinking tokens and returning wrong results, whereas successful reasoning typically uses 6000-8000 tokens, suggesting an issue with adaptive thinking or server-side inference changes.
+A security researcher disclosed a prompt injection vulnerability in YouTube's AI-powered comment suggestion feature, where an attacker's malicious comment can cause the AI to leak details about a creator's private, unlisted videos when the creator uses the feature in YouTube Studio. This vulnerability highlights a fundamental and practical security flaw in integrating LLMs into user-facing products, potentially compromising creator privacy and platform trust, and underscores the systemic challenge of defending against prompt injection attacks. The attack requires a multi-step social engineering chain: an attacker must post a crafted comment on a creator's video, and the creator must then voluntarily click YouTube's suggested AI prompt to summarize comments in YouTube Studio. The vulnerability exploits the lack of clear role boundaries between user-provided comments and system instructions in the AI's processing.
 
-hackernews · maille · Jul 4, 21:51 · [Discussion](https://news.ycombinator.com/item?id=48789428)
+hackernews · javxfps · Jul 4, 16:45 · [Discussion](https://news.ycombinator.com/item?id=48786781)
 
-**Background**: GPT-5.5 Codex is an advanced AI model from OpenAI designed for code generation and reasoning. 'Reasoning tokens' refer to the internal processing steps the model takes before generating a final answer, and clustering this process at fixed boundaries could limit its ability to solve complex problems that require more iterative thought.
+**Background**: Prompt injection is a known class of security vulnerability in Large Language Model (LLM) applications where malicious instructions embedded in user input can hijack the model's behavior. YouTube's AI comment suggestion feature is designed to help creators efficiently manage and respond to large volumes of comments by generating draft replies or summaries. A critical security principle for such systems is to strictly separate untrusted user input from trusted system prompts, a principle this vulnerability appears to violate.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://marginlab.ai/trackers/codex/">Codex gpt-5.5-xhigh Performance Tracker | Marginlab</a></li>
-<li><a href="https://community.openai.com/t/gpt-5-5-seems-to-be-degraded/1381700">GPT 5.5 seems to be degraded - Codex CLI - OpenAI Developer Community</a></li>
+<li><a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">LLM01:2025 Prompt Injection - OWASP Gen AI Security Project</a></li>
+<li><a href="https://www.hackerone.com/ai/prompt-injection-deep-dive">AI Prompt Injection : Vulnerability , Impact, and Remediation</a></li>
 
 </ul>
 </details>
 
-**Discussion**: Multiple users on Hacker News and GitHub have confirmed the performance regression, describing symptoms like sudden drops in code quality and the model's inability to follow complex instructions. The sentiment is one of frustration, with some developers already switching to competing models like Claude as a workaround.
+**Discussion**: The community discussion shows significant engagement, with a former Google engineer suggesting YouTube's handling may be influenced by internal performance review structures rather than pure security triage. Many commenters express disbelief that YouTube does not classify prompt injection as a bug, while others praise the researcher's clear and factual disclosure style.
 
-**Tags**: `#AI`, `#LLM`, `#OpenAI`, `#performance-regression`, `#developer-tools`
+**Tags**: `#security-vulnerability`, `#prompt-injection`, `#youtube`, `#ai-security`, `#privacy`
 
 ---
 
 <a id="item-3"></a>
-## [$200K Bounty Offered to Digitize All Books from Google Books or Similar Services](https://software.annas-archive.gl/AnnaArchivist/annas-archive/-/work_items/234) ⭐️ 8.0/10
+## [More Capable Language Models May Perform Worse at Tool Calling](https://lucumr.pocoo.org/2026/7/4/better-models-worse-tools/) ⭐️ 8.0/10
 
-A $200,000 bounty has been announced on the Anna's Archive platform for someone who can successfully scan and digitize the entire collection of books available on Google Books or a comparable large-scale digital library service. This bounty highlights a significant community-driven effort for large-scale digital preservation and open access to knowledge, potentially impacting researchers, students, and readers in regions with limited book access. The bounty is specifically for a comprehensive scan of all books from a service like Google Books, which would represent an enormous undertaking in digital archiving, but the technical and legal challenges of such a project are substantial.
+The article identifies a paradox where increasingly capable large language models (LLMs) show degraded performance in tool-calling tasks, such as generating incorrect syntax or inventing fields, which challenges the assumption that general model improvement translates to better specialized tool integration. This issue is significant because reliable tool-calling is fundamental for building practical AI agents and developer tools, and its degradation directly impacts the cost, latency, and reliability of LLM-powered applications. The article highlights that models trained in 'forgiving' runtimes may learn to invent interface details, causing problems when integrated with strict external systems, and that alternative approaches like providing clear error guidance or using standardized interfaces like `curl` can mitigate the issue.
 
-hackernews · Cider9986 · Jul 4, 16:51 · [Discussion](https://news.ycombinator.com/item?id=48786838)
+hackernews · leemoore · Jul 4, 20:16 · [Discussion](https://news.ycombinator.com/item?id=48788599)
 
-**Background**: Book scanning or digitization is the process of converting physical books into digital formats like images or e-books, a practice that has been central to projects like Google Books for creating searchable digital libraries. Anna's Archive is a shadow library or search engine that provides access to a wide collection of scanned books, often navigating complex copyright issues to support open access.
+**Background**: Tool calling (or function calling) refers to the ability of an LLM to generate structured commands, like API requests, to interact with external tools and services. This capability is essential for creating AI agents that can perform actions in the real world, such as querying databases or controlling software. As models are trained primarily on vast text corpora, their proficiency in following precise, often idiosyncratic, tool-specific schemas does not necessarily scale with their general reasoning power.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Book_scanning">Book scanning - Wikipedia</a></li>
-<li><a href="https://www.researchgate.net/publication/220167657_Mass_Book_Digitization_The_Deeper_Story_of_Google_Books_and_the_Open_Content_Alliance">Mass Book Digitization : The Deeper Story of Google Books and the...</a></li>
-<li><a href="https://hurix.theecomguru.com/digitizing-books-at-scale/">6 Factors to Consider while Digitizing Books at Scale – Hurix Digital</a></li>
+<li><a href="https://dev.to/amartyajha/how-poor-tool-calling-behavior-increases-llm-cost-and-latency-3idf">How Poor Tool Calling Behavior Increases LLM Cost and Latency</a></li>
+<li><a href="https://a16z.com/emerging-architectures-for-llm-applications/">Emerging Architectures for LLM Applications - Andreessen Horowitz</a></li>
+<li><a href="https://www.ibm.com/think/topics/ai-agents">What Are AI Agents ? | IBM</a></li>
 
 </ul>
 </details>
 
-**Discussion**: The community discussion shows strong personal testimonials from users in countries with limited book access who rely on Anna's Archive for education and research, alongside mentions of other rare book archives. Some comments express curiosity about the project's backers and compare it to potential future bounties for web archiving, reflecting broader concerns about digital access and preservation.
+**Discussion**: Developers shared practical solutions, emphasizing that clear, helpful error messages are a simple and effective fix that allows the model to self-correct within a session. Others advocated for using well-known, standardized interfaces like `curl` commands over complex, custom protocols like MCP for more reliable integration. A commenter also noted that this creates a potential economic moat, as fine-tuning models on specific closed-source harnesses can lock users into particular ecosystems.
 
-**Tags**: `#digital preservation`, `#open access`, `#book scanning`, `#bounty`, `#community impact`
+**Tags**: `#LLM`, `#tool-calling`, `#software-engineering`, `#AI-agents`, `#developer-tools`
 
 ---
 
 <a id="item-4"></a>
-## [Claude AI reviews sqlite-utils for $149.25, finds critical bugs before stable release.](https://simonwillison.net/2026/Jul/5/sqlite-utils-fable/#atom-everything) ⭐️ 8.0/10
+## [Potential Session Data Leakage Reported Between LLM User Accounts](https://github.com/anthropics/claude-code/issues/74066) ⭐️ 8.0/10
 
-Developer Simon Willison used the Claude Fable AI model to perform a final pre-release code review of the sqlite-utils 4.0 release candidate, identifying five critical 'release blocker' bugs, including one that could cause data loss, for a total cost of approximately $149.25. This demonstrates a practical, high-stakes application of AI as a quality assurance tool in open-source development, showing how AI can uncover complex, subtle bugs that humans might miss, potentially improving software stability and security for a widely used developer library. The review process involved 37 prompts, 34 commits, and code changes across 30 files, with the most severe bug found in the `delete_where()` function which could leave a database connection in a broken state leading to data loss.
+A GitHub issue and Hacker News discussion have surfaced community reports of potential session or cache data being swapped or leaked between different user accounts on major LLM platforms like Claude and GPT. The issue highlights specific anecdotes where API infrastructure allegedly caused response mix-ups. This is significant because it raises critical security and privacy concerns for the rapidly growing multi-tenant LLM industry, potentially eroding user trust if sensitive data can leak across organizational boundaries. Such incidents could impact enterprise adoption and demand stricter data isolation protocols from providers. While the reports are based on user anecdotes and have not been officially confirmed as widespread vulnerabilities, a Claude Code team member responded by stating they are confident the specific incident reported was a hallucination but that the team is investigating. The discussion references potential causes like API gateway errors handling HTTP status codes or cache collisions.
 
-rss · Simon Willison · Jul 5, 01:00
+hackernews · chatmasta · Jul 4, 14:03 · [Discussion](https://news.ycombinator.com/item?id=48785485)
 
-**Background**: sqlite-utils is a popular Python CLI utility and library for interacting with SQLite databases, created by Simon Willison. Claude Fable is Anthropic's most capable publicly available AI model, excelling at software engineering tasks. Semantic Versioning (SemVer) is a versioning scheme where major version increments indicate incompatible API changes, making stable major releases critical.
+**Background**: Large Language Model (LLM) providers often deploy multi-tenant architectures where a single infrastructure serves many users or organizations, making proper data isolation a fundamental security requirement. Techniques like prompt caching are used to improve performance, but if not implemented with strict tenant boundaries, they can create risks for data leakage. Ensuring that one customer's data or context never bleeds into another's session is a critical, non-negotiable aspect of production LLM system design.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Software_versioning">Software versioning - Wikipedia</a></li>
-<li><a href="https://www.anthropic.com/claude/fable">Claude Fable \ Anthropic</a></li>
-<li><a href="https://github.com/simonw/sqlite-utils">GitHub - simonw/sqlite-utils: Python CLI utility and library ...</a></li>
+<li><a href="https://medium.com/@michael.hannecke/llm-prompt-caching-what-you-should-know-2665d76d3d8d">LLM Prompt Caching: Performance and Security Guide | Medium</a></li>
+<li><a href="https://www.thedataexperts.us/work/secure-multi-tenant-llm-platform-framework.html">Secure Multi-Tenant LLM Platform: A Build-and-Transfer…</a></li>
+<li><a href="https://aws.amazon.com/blogs/machine-learning/multi-tenant-llm-analytics-with-row-level-security-how-we-built-a-secure-agent-on-aws/">Multi-tenant LLM analytics with row-level security: How we built a secure agent on AWS | Artificial Intelligence</a></li>
 
 </ul>
 </details>
 
-**Tags**: `#AI-assisted coding`, `#SQLite`, `#Open source development`, `#Developer tools`
+**Discussion**: The community discussion is divided between skepticism and concern; some users believe the reports are likely hallucinations or context-related artifacts, while others share corroborating personal experiences of seeing anomalous, out-of-context responses that seemed meant for other users. A member of the Claude Code team officially responded to clarify they are investigating but lean towards the hallucination explanation for the specific report.
+
+**Tags**: `#AI/ML security`, `#LLM infrastructure`, `#data privacy`, `#system reliability`
 
 ---
 
 <a id="item-5"></a>
-## [Open-source USAF method enables MoE fine-tuning on consumer GPUs](https://www.reddit.com/r/MachineLearning/comments/1unl62q/if_your_gpu_can_run_inference_it_should_be_able/) ⭐️ 8.0/10
+## [AI Model Claude Fable Drives sqlite-utils 4.0rc2 Release](https://simonwillison.net/2026/Jul/5/sqlite-utils-fable/#atom-everything) ⭐️ 8.0/10
 
-A new open-source sparse fine-tuning method named USAF has been released, allowing users to fine-tune large Mixture-of-Experts (MoE) models like Qwen3-30B-A3B on consumer GPUs, such as an AMD RX 6750 XT with 12 GB VRAM, by training only the sparse expert weights and the router. This method directly addresses a major practical barrier, as it democratizes the fine-tuning of large MoE models by making it feasible on hardware that can already run inference, potentially accelerating research and application development for a much wider community. The technique, named USAF, is fully open-source under the Apache 2.0 license and specifically targets the sparse structure of MoE models by training only the active expert parameters and the gating network, rather than using adapter-based approaches.
+Simon Willison used Claude Fable to perform a final code review of sqlite-utils 4.0rc1, identifying 5 'release-blocking' bugs over 37 prompts and 34 commits, leading to the 4.0rc2 release. This demonstrates a practical, cost-effective use of AI in a real-world open-source software release process, potentially validating AI as a tool for high-stakes code review and bug discovery. The process involved +1,321 -190 lines of code changes across 30 files, and one critical bug found was that `delete_where()` could cause data loss by poisoning the database connection.
 
-reddit · r/MachineLearning · /u/tsuyu122 · Jul 4, 21:56
+rss · Simon Willison · Jul 5, 01:00
 
-**Background**: Mixture-of-Experts (MoE) models are a neural network architecture that use multiple specialized sub-networks (experts) and a router to process different inputs, allowing for increased model capacity without a proportional increase in computation during inference. Fine-tuning such large models traditionally requires substantial GPU memory, often exceeding what consumer hardware can provide.
+**Background**: sqlite-utils is a popular Python library and CLI for working with SQLite databases. Semantic Versioning (SemVer) is a versioning scheme where a major version increment signifies incompatible API changes, making major releases significant and rare for maintainers. Claude Fable is an advanced AI model from Anthropic.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://www.baeldung.com/cs/mixture-of-experts">The Mixture-of-Experts ML Approach - Baeldung</a></li>
-<li><a href="https://huggingface.co/blog/moe">Mixture of Experts Explained</a></li>
-<li><a href="https://openreview.net/forum?id=hB6jYbvypa&noteId=v1Exgs3kfu">MoE-Pruner: Pruning Mixture - of - Experts Large Language Model ...</a></li>
+<li><a href="https://semver.org/">Semantic Versioning 2.0.0 | Semantic Versioning</a></li>
+<li><a href="https://github.com/simonw/sqlite-utils">GitHub - simonw/sqlite-utils: Python CLI utility and library ...</a></li>
+<li><a href="https://www.anthropic.com/claude/fable">Claude Fable \ Anthropic</a></li>
 
 </ul>
 </details>
 
-**Discussion**: The Reddit community showed significant engagement, with users exploring technical details of the USAF method, its potential use cases for domain adaptation, and discussing its impact on lowering the barrier to entry for MoE model customization.
-
-**Tags**: `#MoE`, `#fine-tuning`, `#sparse-training`, `#consumer-gpu`, `#open-source`
+**Tags**: `#AI-assisted development`, `#SQLite`, `#open-source`, `#software release`, `#Claude AI`
 
 ---
 
 <a id="item-6"></a>
-## [BaryGraph: A Knowledge Graph Where Relationships Are Embedded Documents, Not Edges](https://www.reddit.com/r/MachineLearning/comments/1un3lsf/barygraph_knowledge_graph_where_every/) ⭐️ 8.0/10
+## [GPT-5.5 Codex regression traced to reasoning-token clustering at 516.](https://github.com/openai/codex/issues/30364) ⭐️ 7.0/10
 
-BaryGraph introduces a novel knowledge graph architecture where every relationship is a first-class, embedded document called a 'BaryEdge', enabling recursive construction of 'MetaBary' triads for cross-domain concept bridging. The system is live on MongoDB and includes an MCP server for public querying. This approach directly addresses a critical limitation in standard RAG and vector search, which often fails to capture structural connections between concepts that are semantically distant in embedding space. It has significant potential to enhance information retrieval and discovery in complex, cross-domain scientific and linguistic research. The BaryEdge's vector is computed using a weighted formula combining the embeddings of its two connected nodes and the relationship type, controlled by a 'connection quality' parameter. Benchmarks show that structural metrics derived from the graph correlate significantly (ρ ≈ 0.32–0.53) with human similarity judgments, unlike raw cosine similarity.
+Users have identified a reproducible performance regression in GPT-5.5 Codex where the model's reasoning process clusters around exactly 516 tokens, leading to incorrect outputs. When the model uses significantly more thinking tokens (6000-8000), it returns the correct result. This issue undermines the reliability of a major AI coding assistant, directly affecting developers' productivity and trust in automated coding tools. It highlights ongoing challenges with LLM consistency and the risks of silent, server-side changes in commercial AI services. The regression appears related to an 'adaptive thinking' mechanism, where short reasoning paths yield wrong answers while longer paths are correct. Some users report that this issue has persisted for months and have switched to alternative models like Claude as a workaround.
 
-reddit · r/MachineLearning · /u/adseipsum · Jul 4, 08:24
+hackernews · maille · Jul 4, 21:51 · [Discussion](https://news.ycombinator.com/item?id=48789428)
 
-**Background**: Traditional knowledge graphs represent relationships as simple edges between nodes. In contrast, embedding-based vector search (common in RAG systems) treats a relationship merely as a byproduct of two points being close in vector space, which discards rich structural information. BaryGraph re-imagines this by making relationships themselves primary, embeddable entities, allowing for multi-hop structural reasoning.
+**Background**: OpenAI Codex is an AI system designed to generate code, and its performance is often measured by the accuracy and efficiency of its outputs. Token clustering in this context likely refers to the model allocating a fixed, potentially suboptimal, number of computational 'thinking' tokens for a task. Performance regressions in such tools can be caused by internal model updates or changes in inference infrastructure.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://modelcontextprotocol.io/">What is the Model Context Protocol ( MCP )? - Model Context Protocol</a></li>
-<li><a href="https://ollama.com/library/nomic-embed-text">nomic-embed-text</a></li>
+<li><a href="https://news.ycombinator.com/item?id=48749961">Codex reasoning - token clustering at 516 may be... | Hacker News</a></li>
+<li><a href="https://community.openai.com/t/severe-regression-in-gpt-5-codex-performance/1358412">Severe regression in GPT-5 Codex performance - Codex - OpenAI ...</a></li>
+<li><a href="https://github.com/openai/codex/issues/6835">Significant Performance Regression in Codex from v0.4.39 ...</a></li>
 
 </ul>
 </details>
 
-**Discussion**: The original Reddit post invites technical feedback on the validity of the cross-domain 'bridges' the system discovers. Community discussion would likely focus on evaluating the novelty of treating relationships as documents, the scalability of the recursive MetaBary approach, and the practical utility of the demonstrated cross-domain connections (e.g., between neuroscience and sensor networks).
+**Discussion**: The community confirms the regression is easily reproducible, with many reporting daily quality jumps and have already switched to alternatives like Claude due to OpenAI's lack of response. Some compare it to past regressions in competing products and debate using per-token pricing or local models to avoid such silent server-side issues.
 
-**Tags**: `#knowledge-graphs`, `#embedding-models`, `#retrieval-augmented-generation`, `#mongodb`, `#semantic-search`
+**Tags**: `#GPT-5.5`, `#AI coding`, `#performance regression`, `#OpenAI Codex`, `#LLM reliability`
+
+---
+
+<a id="item-7"></a>
+## [USAF: Open-Source Sparse Fine-Tuning for MoE Models on Consumer GPUs](https://www.reddit.com/r/MachineLearning/comments/1unl62q/if_your_gpu_can_run_inference_it_should_be_able/) ⭐️ 7.0/10
+
+A new open-source method called USAF enables fine-tuning of large Mixture-of-Experts models by training only the expert weights and the router, demonstrated on a consumer AMD GPU with 12GB VRAM. This method significantly lowers the hardware barrier for fine-tuning large, state-of-the-art MoE models, potentially democratizing access to model customization for researchers and developers without enterprise-grade hardware. The project is released under the Apache 2.0 license and specifically targets sparse expert weights and the router, which is a different approach compared to common adapter-based methods like LoRA.
+
+reddit · r/MachineLearning · /u/tsuyu122 · Jul 4, 21:56
+
+**Background**: Mixture-of-Experts (MoE) models use a sparse architecture where a router network selects a subset of specialized expert subnetworks (the 'experts') for each input, allowing for a large total parameter count while keeping computation manageable. Fine-tuning such models is challenging because standard techniques often require updating all parameters or adding adapters to the entire dense structure. The USAF method focuses on updating only the expert weights and the router itself, leveraging the model's inherent sparsity to reduce memory and compute requirements.
+
+<details><summary>References</summary>
+<ul>
+<li><a href="https://huggingface.co/blog/moe">Mixture of Experts Explained</a></li>
+<li><a href="https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts">A Visual Guide to Mixture of Experts (MoE)</a></li>
+<li><a href="https://www.ibm.com/think/topics/mixture-of-experts">What is mixture of experts? | IBM</a></li>
+
+</ul>
+</details>
+
+**Tags**: `#Mixture-of-Experts`, `#Fine-tuning`, `#Open-Source`, `#GPU-Inference`, `#Machine-Learning`
+
+---
+
+<a id="item-8"></a>
+## [Fanfiction community splits over AI detection methods and false accusations.](https://www.theverge.com/tech/960854/ai-fanfiction-ao3-claude-detector) ⭐️ 6.0/10
+
+A new movement within the fanfiction community is actively trying to identify and exclude authors using generative AI tools like Claude and ChatGPT, but the detection methods being implemented are questionable and risk causing false accusations against human writers. This conflict highlights the tension between preserving human creativity and adopting new technology, with flawed detection tools potentially silencing legitimate writers and damaging trust within creative communities. The community's response has created internal divisions, as the broad rejection of AI tools like Claude and ChatGPT is being enforced through detection methods that are prone to error, meaning any fanfic writer could be wrongly accused.
+
+rss · The Verge - AI · Jul 4, 12:00
+
+**Background**: Generative AI can create text, code, and images, and AI detection tools use methods like analyzing text patterns or statistical likelihood to guess if content was machine-written, though they often struggle with false positives—incorrectly flagging human work as AI. Fanfiction communities, centered on platforms like Archive of Our Own (AO3), value original human expression, making the introduction of AI a point of significant cultural and ethical conflict.
+
+<details><summary>References</summary>
+<ul>
+<li><a href="https://www.grammarly.com/blog/ai/how-do-ai-detectors-work/">How Do AI Detectors Work? Key Methods and Limitations | Grammarly</a></li>
+<li><a href="https://lawlibguides.sandiego.edu/c.php?g=1443311&p=10721367">The Problems with AI Detectors: False Positives and False Negatives - Generative AI Detection Tools - Guides at University of San Diego Legal Research Center</a></li>
+
+</ul>
+</details>
+
+**Tags**: `#AI ethics`, `#creative writing`, `#content detection`, `#community conflict`, `#generative AI`
+
+---
+
+<a id="item-9"></a>
+## [Semiconductor and AI Trends Drive Growth for Chinese Fluorine New Materials](https://36kr.com/newsflashes/3882063262068998?f=rss) ⭐️ 6.0/10
+
+A research report from Everbright Securities identifies that leading Chinese fluorine chemical companies are accelerating their expansion into high-value fluorine new materials, creating a second growth curve driven by breakthroughs in semiconductor-grade hydrofluoric acid and liquid cooling fluids for AI infrastructure. This shift is significant as it enables domestic companies to break foreign monopolies in critical semiconductor supply chains and positions them to capitalize on the rapidly growing demand for advanced thermal management solutions in AI and high-performance computing data centers. Domestic producers have achieved G5-grade electronic hydrofluoric acid with PPT-level purity, passing certification from top foundries, while fluorine chemical firms are developing perfluoropolyether (PFPE) coolants essential for immersion liquid cooling systems due to their superior insulation and thermal properties.
+
+rss · 36kr - AI · Jul 5, 01:18
+
+**Background**: Electronic-grade hydrofluoric acid is a key wet chemical essential for semiconductor manufacturing, and G5 is the highest purity standard. Immersion liquid cooling is an advanced thermal management technique where components are submerged in a non-conductive fluid, becoming crucial for cooling high-power AI chips and data centers as traditional air cooling reaches its limits.
+
+<details><summary>References</summary>
+<ul>
+<li><a href="https://www.toutiao.com/article/7644957391921873427/">半导体“工业味精”G5级氢氟酸：硬核技术壁垒与国产替代</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/1945118179559998489">全氟碳化合物（如全氟聚醚PFPE）作为浸没式液冷系统的核心冷却液</a></li>
+<li><a href="https://www.eet-china.com/mp/a480686.html">2026最新湿电子化学品产业发展报告深度解读（建议收藏）</a></li>
+
+</ul>
+</details>
+
+**Tags**: `#semiconductor`, `#materials-science`, `#AI-infrastructure`, `#industry-analysis`, `#fluorochemistry`
+
+---
+
+<a id="item-10"></a>
+## [Micron Invests $9.3 Billion to Expand Hiroshima Plant for AI Memory Chips](https://36kr.com/newsflashes/3882061184413701?f=rss) ⭐️ 6.0/10
+
+Micron Technology has begun construction on a $9.3 billion (1.5 trillion yen) expansion of its Hiroshima, Japan plant to produce advanced memory chips, including High Bandwidth Memory (HBM) for AI applications, with initial shipments expected around the summer of 2028. This major investment directly supports the global AI hardware supply chain, as HBM is a critical component for high-performance AI processors like those from NVIDIA, and it reflects the intense competition among memory giants (Micron, Samsung, SK Hynix) to expand capacity for the AI boom. The expansion project carries a total investment of 1.5 trillion yen ($9.3 billion), and the Hiroshima facility is specifically designated to produce HBM, which is essential for AI accelerators; this announcement comes shortly after SK Hynix revealed its own plan to invest $51.46 billion in a new NAND plant in South Korea.
+
+rss · 36kr - AI · Jul 5, 01:16
+
+**Background**: High Bandwidth Memory (HBM) is a high-performance memory interface that uses 3D stacking of DRAM chips connected with through-silicon vias (TSVs) to achieve much higher bandwidth and power efficiency than traditional memory, making it vital for AI and high-performance computing. Major memory chip manufacturers are currently in an intense investment cycle to expand advanced production capacity to meet soaring demand driven by artificial intelligence applications.
+
+<details><summary>References</summary>
+<ul>
+<li><a href="https://theoutpost.ai/news-story/micron-technology-breaks-ground-on-9-3-billion-hiroshima-plant-expansion-for-ai-memory-chips-28213/">Micron Technology $9.3B Hiroshima Plant Expansion</a></li>
+<li><a href="https://en.wikipedia.org/wiki/High_Bandwidth_Memory">High Bandwidth Memory - Wikipedia</a></li>
+
+</ul>
+</details>
+
+**Tags**: `#semiconductors`, `#HBM`, `#AI hardware`, `#investment`, `#manufacturing`
 
 ---
