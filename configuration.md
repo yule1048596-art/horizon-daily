@@ -206,13 +206,15 @@ All sources are configured under the top-level `sources` key in `config.json`.
       {
         "type": "user_events",
         "username": "gvanrossum",
-        "enabled": true
+        "enabled": true,
+        "category": "oss"
       },
       {
         "type": "repo_releases",
         "owner": "python",
         "repo": "cpython",
-        "enabled": true
+        "enabled": true,
+        "category": "oss"
       }
     ]
   }
@@ -227,7 +229,8 @@ All sources are configured under the top-level `sources` key in `config.json`.
     "hackernews": {
       "enabled": true,
       "fetch_top_stories": 30,
-      "min_score": 100
+      "min_score": 100,
+      "category": "tech"
     }
   }
 }
@@ -243,12 +246,16 @@ All sources are configured under the top-level `sources` key in `config.json`.
         "name": "Blog Name",
         "url": "https://example.com/feed.xml",
         "enabled": true,
-        "category": "ai-ml"
+        "category": "ai-ml",
+        "fetch_limit": 10
       }
     ]
   }
 }
 ```
+
+- `fetch_limit` — optional per-feed cap applied before the time-window filter;
+  useful for high-volume feeds and predictable AI token usage
 
 ### Reddit
 
@@ -265,14 +272,16 @@ Reddit scraping is free and does not require API keys. Subreddit posts and comme
           "subreddit": "MachineLearning",
           "sort": "hot",
           "fetch_limit": 25,
-          "min_score": 10
+          "min_score": 10,
+          "category": "ai-ml"
         }
       ],
       "users": [
         {
           "username": "spez",
           "sort": "new",
-          "fetch_limit": 10
+          "fetch_limit": 10,
+          "category": "social"
         }
       ]
     }
@@ -293,7 +302,8 @@ Telegram scraping uses the public web preview at `https://t.me/s/<channel>`, so 
         {
           "channel": "zaihuapd",
           "enabled": true,
-          "fetch_limit": 20
+          "fetch_limit": 20,
+          "category": "ai-news"
         }
       ]
     }
@@ -305,6 +315,7 @@ Telegram scraping uses the public web preview at `https://t.me/s/<channel>`, so 
 - `channels` — list of public Telegram channels to monitor
 - `channel` — Telegram channel username only, without `@` or the full `https://t.me/` URL
 - `fetch_limit` — maximum number of recent messages to inspect per channel per run (default: `20`)
+- `category` — optional tag for balanced digest grouping (e.g., `"ai-news"`, `"finance"`)
 
 ### Twitter
 
@@ -317,6 +328,7 @@ Requires an [Apify](https://apify.com) account. Set `APIFY_TOKEN` in your `.env`
       "enabled": true,
       "users": ["karpathy", "ylecun"],
       "fetch_limit": 10,
+      "category": "social",
       "fetch_reply_text": false,
       "max_replies_per_tweet": 3,
       "max_tweets_to_expand": 10,
@@ -328,6 +340,7 @@ Requires an [Apify](https://apify.com) account. Set `APIFY_TOKEN` in your `.env`
 
 - `users` — Twitter screen names to monitor, without the `@` prefix
 - `fetch_limit` — maximum tweets to fetch per run (across all users combined; minimum 100 due to actor constraint)
+- `category` — optional tag for balanced digest grouping (applies to all tweets from this source)
 - `fetch_reply_text` — when `true`, fetch actual reply bodies for important tweets and append them under `--- Top Comments ---` so the AI can factor in community discussion. Disabled by default.
 - `max_replies_per_tweet` — maximum reply lines to append per tweet (default: 3)
 - `max_tweets_to_expand` — cap on how many tweets get reply expansion per run, to control Apify credit usage (default: 10)
@@ -394,7 +407,8 @@ Pulls top star-gain repositories from the [OSS Insight](https://ossinsight.io) p
       "languages": ["All", "Python", "TypeScript"],
       "keywords": [],
       "min_stars": 10,
-      "max_items": 30
+      "max_items": 30,
+      "category": "oss-trending"
     }
   }
 }
@@ -405,6 +419,7 @@ Pulls top star-gain repositories from the [OSS Insight](https://ossinsight.io) p
 - `keywords` — optional case-insensitive substrings matched against `description`, `collection_names`, and `repo_name`. Only repos containing at least one keyword pass through. Leave empty to ingest everything trending.
 - `min_stars` — drop repos with fewer than this many stars gained in the period.
 - `max_items` — final cap after merging and sorting by `stars_gained` descending.
+- `category` — optional tag for balanced digest grouping (e.g., `"oss-trending"`)
 
 No API key is required.
 
@@ -427,6 +442,7 @@ Content is scored 0-10:
     "category_groups": {
       "ai": {
         "name": "AI / Machine Learning",
+        "names": {"zh": "人工智能", "en": "AI / Machine Learning"},
         "limit": 5,
         "categories": ["ai-news", "ai-tools", "machine-learning", "llm"]
       },
@@ -449,19 +465,33 @@ Content is scored 0-10:
   `limit` and a non-empty `categories` list. Items within each group are kept by
   AI score, highest first.
 - `category_groups.*.name`: Optional display name used in run logs
+- `category_groups.*.names`: Optional language-to-label map used for section
+  headings in generated summaries, for example `{"zh": "国内热点", "en":
+  "China News"}`. `name` is used as the fallback.
 - `default_group`: Group key for items whose category does not match any
   configured group. Default is `other`.
-- `default_group_limit`: Optional positive limit for unmatched items. If omitted,
+- `default_group_limit`: Optional non-negative limit for unmatched items. Set it
+  to `0` to keep the digest strictly limited to configured sections. If omitted,
   unmatched items are unlimited except for `max_items`.
 
 Balanced digest filtering runs after AI score threshold filtering and topic
 deduplication, but before enrichment. This reduces enrichment calls to only the
 items that can appear in the final digest.
 
+When category groups are configured, generated Markdown is rendered in group
+configuration order. Each group becomes a section and uses the localized label
+from `names` when available. Configured sections remain visible with a short
+empty-state message when no item in that group meets the score threshold.
+Without category groups, summaries keep the legacy score-ordered flat layout.
+
 Group matching uses the source category stored in `ContentItem.metadata.category`.
-RSS sources expose this through `sources.rss[].category`, and OpenBB watchlists
-through `sources.openbb.watchlists[].category`. Sources without a category enter
-the default group.
+All source types support a `category` field: `sources.rss[].category`,
+`sources.github[].category`, `sources.hackernews.category`,
+`sources.reddit.subreddits[].category`, `sources.reddit.users[].category`,
+`sources.telegram.channels[].category`, `sources.twitter.category`,
+`sources.openbb.watchlists[].category`, `sources.ossinsight.category`,
+`sources.gdelt.category`, and `sources.google_news.category`.
+Sources without a category set enter the default group.
 
 If the same category appears in multiple groups, Horizon logs a warning and uses
 the first group in configuration order. Omitting both `category_groups` and
