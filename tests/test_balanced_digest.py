@@ -49,7 +49,12 @@ def test_unconfigured_balanced_digest_preserves_old_behavior() -> None:
 def test_category_groups_apply_limits_and_default_group_limit() -> None:
     filtering = FilteringConfig(
         category_groups={
-            "ai": CategoryGroupConfig(limit=2, categories=["ai", "ml"]),
+            "ai": CategoryGroupConfig(
+                name="AI",
+                names={"zh": "人工智能", "en": "AI"},
+                limit=2,
+                categories=["ai", "ml"],
+            ),
             "finance": CategoryGroupConfig(limit=1, categories=["finance"]),
         },
         default_group_limit=1,
@@ -73,6 +78,30 @@ def test_category_groups_apply_limits_and_default_group_limit() -> None:
         "ai-mid",
     ]
     assert result.group_counts == {"other": 1, "ai": 2, "finance": 1}
+    assert result.items[1].metadata["digest_group"] == "ai"
+    assert result.items[1].metadata["digest_group_order"] == 0
+    assert result.items[1].metadata["digest_group_names"] == {
+        "zh": "人工智能",
+        "en": "AI",
+    }
+
+
+def test_zero_default_group_limit_excludes_unmatched_items() -> None:
+    filtering = FilteringConfig(
+        category_groups={
+            "ai": CategoryGroupConfig(limit=2, categories=["ai"]),
+        },
+        default_group_limit=0,
+    )
+    items = [
+        make_item("other-top", 10.0, "world"),
+        make_item("ai", 9.0, "ai"),
+    ]
+
+    result = make_orchestrator(filtering).apply_balanced_digest(items)
+
+    assert [item.id for item in result.items] == ["ai"]
+    assert result.group_counts == {"ai": 1}
 
 
 def test_max_items_applies_after_group_limits() -> None:
@@ -126,7 +155,7 @@ def test_duplicate_category_warns_and_first_group_wins() -> None:
     "kwargs",
     [
         {"max_items": 0},
-        {"default_group_limit": 0},
+        {"default_group_limit": -1},
         {"category_groups": {"ai": {"limit": 0, "categories": ["ai"]}}},
         {"category_groups": {"ai": {"limit": 1, "categories": []}}},
     ],

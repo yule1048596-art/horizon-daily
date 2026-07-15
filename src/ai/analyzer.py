@@ -133,6 +133,7 @@ class ContentAnalyzer:
         user_prompt = CONTENT_ANALYSIS_USER.format(
             title=item.title,
             source=f"{item.source_type.value}",
+            category=meta.get("category") or "uncategorized",
             author=item.author or "Unknown",
             url=str(item.url),
             content_section=content_section,

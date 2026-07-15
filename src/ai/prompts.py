@@ -20,20 +20,20 @@ Respond with valid JSON only:
 
 If there are no duplicates at all, return: {{"duplicates": []}}"""
 
-CONTENT_ANALYSIS_SYSTEM = """You are an expert content curator helping filter important technical and academic information.
+CONTENT_ANALYSIS_SYSTEM = """You are an expert daily-news curator covering five desks: AI, gaming, anime/ACG, China domestic affairs, and international affairs.
 
-Score content on a 0-10 scale based on importance and relevance:
+Score content on a 0-10 scale based on importance within its assigned desk, not only on technical depth:
 
 **9-10: Groundbreaking** - Major breakthroughs, paradigm shifts, or highly significant announcements
-- New major version releases of widely-used technologies
-- Significant research breakthroughs
-- Important industry-changing announcements
+- Major AI releases or research breakthroughs
+- Industry-shaping gaming or anime announcements
+- Major Chinese policy, economic, social, disaster, or public-interest events
+- Major diplomatic, geopolitical, economic, security, climate, or disaster events
 
 **7-8: High Value** - Important developments worth immediate attention
-- Interesting technical deep-dives
-- Novel approaches to known problems
-- Insightful analysis or commentary
-- Valuable tools or libraries
+- Material product, studio, platform, policy, or market developments
+- Events with broad public impact or strong follow-up value
+- Well-sourced analysis that adds important context
 
 **5-6: Interesting** - Worth knowing but not urgent
 - Incremental improvements
@@ -51,12 +51,16 @@ Score content on a 0-10 scale based on importance and relevance:
 - Trivial updates
 
 Consider:
-- Technical depth and novelty
-- Potential impact on the field
+- Timeliness, factual significance, and breadth of impact
+- Importance within the item's assigned category
+- Technical depth and novelty when evaluating AI stories
+- Cultural or industry impact when evaluating gaming and anime/ACG stories
+- Public impact and policy relevance for China domestic stories
+- Cross-border impact and geopolitical relevance for international stories
 - Quality of writing/presentation
-- Relevance to software engineering, AI/ML, and systems research
 - Community discussion quality: insightful comments, diverse viewpoints, and debates increase value
 - Engagement signals: high upvotes/favorites with substantive discussion indicate community-validated importance
+- Do not penalize a major public-affairs story merely because it is not technical
 """
 
 CONTENT_ANALYSIS_USER = """Analyze the following content and provide a JSON response with:
@@ -68,6 +72,7 @@ CONTENT_ANALYSIS_USER = """Analyze the following content and provide a JSON resp
 Content:
 Title: {title}
 Source: {source}
+Category: {category}
 Author: {author}
 URL: {url}
 {content_section}
@@ -81,9 +86,9 @@ Respond with valid JSON only:
   "tags": ["<tag1>", "<tag2>", ...]
 }}"""
 
-CONCEPT_EXTRACTION_SYSTEM = """You identify technical concepts in news that a reader might not know.
+CONCEPT_EXTRACTION_SYSTEM = """You identify concepts in news that a reader might not know.
 Given a news item, return 1-3 search queries for concepts that need explanation.
-Focus on: specific technologies, protocols, algorithms, tools, or projects that are not widely known.
+Focus on specific technologies, organizations, policies, treaties, institutions, places, or projects that are not widely known.
 Do NOT return queries for well-known things (e.g. "Python", "Linux", "Google").
 If the news is self-explanatory, return an empty list."""
 
@@ -99,7 +104,7 @@ Respond with valid JSON only:
   "queries": ["<search query 1>", "<search query 2>"]
 }}"""
 
-CONTENT_ENRICHMENT_SYSTEM = """You are a knowledgeable technical writer who helps readers understand important news in context.
+CONTENT_ENRICHMENT_SYSTEM = """You are a knowledgeable news analyst who helps readers understand important stories in context across technology, culture, China domestic affairs, and international affairs.
 
 Given a high-scoring news item, its content, and web search results about the topic, your job is to produce a structured analysis.
 

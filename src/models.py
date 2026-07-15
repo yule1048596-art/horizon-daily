@@ -142,6 +142,7 @@ class RSSSourceConfig(BaseModel):
     url: HttpUrl
     enabled: bool = True
     category: Optional[str] = None
+    fetch_limit: Optional[int] = Field(default=None, gt=0)
 
 
 class RedditSubredditConfig(BaseModel):
@@ -413,6 +414,7 @@ class CategoryGroupConfig(BaseModel):
     """A quota group containing one or more source categories."""
 
     name: Optional[str] = None
+    names: Dict[str, str] = Field(default_factory=dict)
     limit: int = Field(gt=0)
     categories: List[str] = Field(min_length=1)
 
@@ -425,7 +427,7 @@ class FilteringConfig(BaseModel):
     max_items: Optional[int] = Field(default=None, gt=0)
     category_groups: Dict[str, CategoryGroupConfig] = Field(default_factory=dict)
     default_group: str = "other"
-    default_group_limit: Optional[int] = Field(default=None, gt=0)
+    default_group_limit: Optional[int] = Field(default=None, ge=0)
 
 
 class Config(BaseModel):

@@ -149,7 +149,13 @@ class HorizonOrchestrator:
             today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
             for lang in self.config.ai.languages:
                 summarizer = DailySummarizer()
-                summary = await summarizer.generate_summary(important_items, today, len(all_items), language=lang)
+                summary = await summarizer.generate_summary(
+                    important_items,
+                    today,
+                    len(all_items),
+                    language=lang,
+                    sections=self._summary_sections(lang),
+                )
 
                 # Save to data/summaries/
                 summary_path = self.storage.save_daily_summary(today, summary, language=lang)
@@ -572,6 +578,21 @@ class HorizonOrchestrator:
         if max_items is not None:
             selected = selected[:max_items]
 
+        if groups:
+            group_order = {group_key: index for index, group_key in enumerate(groups)}
+            for item, group_key in selected:
+                item.metadata["digest_group"] = group_key
+                item.metadata["digest_group_order"] = group_order.get(
+                    group_key, len(group_order)
+                )
+                group = groups.get(group_key)
+                if group:
+                    item.metadata["digest_group_name"] = group.name or group_key
+                    item.metadata["digest_group_names"] = dict(group.names)
+                else:
+                    item.metadata["digest_group_name"] = group_key
+                    item.metadata["digest_group_names"] = {}
+
         final_counts: Dict[str, int] = defaultdict(int)
         for _, group_key in selected:
             final_counts[group_key] += 1
@@ -724,4 +745,20 @@ class HorizonOrchestrator:
 
         summarizer = DailySummarizer()
 
-        return await summarizer.generate_summary(items, date, total_fetched, language=language)
+        return await summarizer.generate_summary(
+            items,
+            date,
+            total_fetched,
+            language=language,
+            sections=self._summary_sections(language),
+        )
+
+    def _summary_sections(self, language: str) -> List[tuple[str, str]]:
+        """Return configured digest sections in display order for one language."""
+        return [
+            (
+                group_key,
+                group.names.get(language) or group.name or group_key,
+            )
+            for group_key, group in self.config.filtering.category_groups.items()
+        ]

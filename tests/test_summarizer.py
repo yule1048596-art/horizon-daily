@@ -124,6 +124,83 @@ def test_generate_summary_zh_uses_localized_selection_header_and_numeric_date():
     assert "Apr 25, 08:00" not in result
 
 
+def test_generate_summary_renders_localized_digest_sections_in_config_order():
+    summarizer = DailySummarizer()
+    world_item = _make_item(1)
+    world_item.metadata.update(
+        {
+            "digest_group": "world",
+            "digest_group_order": 4,
+            "digest_group_name": "World",
+            "digest_group_names": {"zh": "国际热点", "en": "World News"},
+        }
+    )
+    ai_item = _make_item(2)
+    ai_item.metadata.update(
+        {
+            "digest_group": "ai",
+            "digest_group_order": 0,
+            "digest_group_name": "AI",
+            "digest_group_names": {"zh": "AI", "en": "AI"},
+        }
+    )
+
+    result = _run_async(
+        summarizer.generate_summary(
+            [world_item, ai_item],
+            date="2026-04-25",
+            total_fetched=10,
+            language="zh",
+        )
+    )
+
+    assert result.index("## AI") < result.index("## 国际热点")
+    assert "**AI**\n\n1. [Important Item 2](#item-1)" in result
+    assert "**国际热点**\n\n2. [Important Item 1](#item-2)" in result
+    assert "### [Important Item 2](https://example.com/items/2)" in result
+
+
+def test_generate_summary_keeps_configured_empty_sections_visible():
+    summarizer = DailySummarizer()
+    ai_item = _make_item(1)
+    ai_item.metadata.update(
+        {
+            "digest_group": "ai",
+            "digest_group_order": 0,
+            "digest_group_name": "AI",
+        }
+    )
+
+    result = _run_async(
+        summarizer.generate_summary(
+            [ai_item],
+            date="2026-04-25",
+            total_fetched=10,
+            language="zh",
+            sections=[("ai", "AI"), ("anime", "二次元")],
+        )
+    )
+
+    assert "## AI" in result
+    assert "## 二次元\n\n_本板块暂无达到重要性阈值的资讯。_" in result
+
+
+def test_generate_summary_preserves_flat_layout_without_digest_groups():
+    summarizer = DailySummarizer()
+
+    result = _run_async(
+        summarizer.generate_summary(
+            [_make_item(1)],
+            date="2026-04-25",
+            total_fetched=10,
+            language="en",
+        )
+    )
+
+    assert "## [Important Item 1](https://example.com/items/1)" in result
+    assert "### [Important Item 1](https://example.com/items/1)" not in result
+
+
 def test_generate_empty_summary_zh_uses_localized_analyzed_line():
     summarizer = DailySummarizer()
 

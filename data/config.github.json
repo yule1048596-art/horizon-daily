@@ -17,144 +17,160 @@
       {
         "type": "user_events",
         "username": "karpathy",
-        "enabled": true
+        "enabled": true,
+        "category": "ai"
       },
       {
         "type": "repo_releases",
         "owner": "anthropics",
         "repo": "claude-code",
-        "enabled": true
+        "enabled": true,
+        "category": "ai"
       },
       {
         "type": "repo_releases",
-        "owner": "google",
+        "owner": "google-deepmind",
         "repo": "gemma",
-        "enabled": true
+        "enabled": true,
+        "category": "ai"
       }
     ],
     "hackernews": {
       "enabled": true,
       "fetch_top_stories": 30,
-      "min_score": 80
+      "min_score": 80,
+      "category": "ai"
     },
     "rss": [
       {
         "name": "Simon Willison",
         "url": "https://simonwillison.net/atom/everything/",
         "enabled": true,
-        "category": "ai-tools"
+        "category": "ai",
+        "fetch_limit": 10
       },
       {
         "name": "OpenAI Blog",
         "url": "https://openai.com/blog/rss.xml",
         "enabled": true,
-        "category": "ai-news"
+        "category": "ai",
+        "fetch_limit": 10
       },
       {
         "name": "Google AI Blog",
         "url": "https://blog.google/technology/ai/rss/",
         "enabled": true,
-        "category": "ai-news"
+        "category": "ai",
+        "fetch_limit": 10
       },
       {
         "name": "The Verge - AI",
         "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
         "enabled": true,
-        "category": "ai-news"
+        "category": "ai",
+        "fetch_limit": 10
       },
       {
         "name": "The Verge - Gaming",
         "url": "https://www.theverge.com/rss/games/index.xml",
         "enabled": true,
-        "category": "gaming"
+        "category": "gaming",
+        "fetch_limit": 10
       },
       {
         "name": "IGN",
         "url": "https://feeds.feedburner.com/ign/games-all",
         "enabled": true,
-        "category": "gaming"
+        "category": "gaming",
+        "fetch_limit": 10
       },
       {
         "name": "Nintendo Everything",
         "url": "https://nintendoeverything.com/feed/",
         "enabled": true,
-        "category": "gaming"
+        "category": "gaming",
+        "fetch_limit": 10
       },
       {
         "name": "Push Square (PlayStation)",
         "url": "https://www.pushsquare.com/feeds/latest",
         "enabled": true,
-        "category": "gaming"
+        "category": "gaming",
+        "fetch_limit": 10
       },
       {
-        "name": "36kr - AI",
+        "name": "Anime News Network",
+        "url": "https://www.animenewsnetwork.com/all/rss.xml?ann-edition=us",
+        "enabled": true,
+        "category": "anime",
+        "fetch_limit": 12
+      },
+      {
+        "name": "MyAnimeList News",
+        "url": "https://myanimelist.net/rss/news.xml",
+        "enabled": true,
+        "category": "anime",
+        "fetch_limit": 12
+      },
+      {
+        "name": "Google News - 二次元",
+        "url": "https://news.google.com/rss/search?q=%E5%8A%A8%E6%BC%AB%20OR%20%E4%BA%8C%E6%AC%A1%E5%85%83%20OR%20%E6%97%A5%E6%9C%AC%E5%8A%A8%E7%94%BB%20OR%20%E6%BC%AB%E7%94%BB%20when%3A1d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
+        "enabled": true,
+        "category": "anime",
+        "fetch_limit": 15
+      },
+      {
+        "name": "36Kr",
         "url": "https://36kr.com/feed",
         "enabled": true,
-        "category": "ai-news-zh"
+        "category": "china",
+        "fetch_limit": 12
+      },
+      {
+        "name": "Google News - 国内社会民生",
+        "url": "https://news.google.com/rss/search?q=%E4%B8%AD%E5%9B%BD%20%E7%A4%BE%E4%BC%9A%20%E6%B0%91%E7%94%9F%20%E7%83%AD%E7%82%B9%20when%3A1d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
+        "enabled": true,
+        "category": "china",
+        "fetch_limit": 15
+      },
+      {
+        "name": "Google News - 国内政策经济",
+        "url": "https://news.google.com/rss/search?q=%E4%B8%AD%E5%9B%BD%20%E6%94%BF%E7%AD%96%20%E7%BB%8F%E6%B5%8E%20%E7%83%AD%E7%82%B9%20when%3A1d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
+        "enabled": true,
+        "category": "china",
+        "fetch_limit": 15
+      },
+      {
+        "name": "BBC World",
+        "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+        "enabled": true,
+        "category": "world",
+        "fetch_limit": 12
+      },
+      {
+        "name": "The Guardian World",
+        "url": "https://www.theguardian.com/world/rss",
+        "enabled": true,
+        "category": "world",
+        "fetch_limit": 12
+      },
+      {
+        "name": "Google News - 国际热点",
+        "url": "https://news.google.com/rss/search?q=%E5%9B%BD%E9%99%85%20%E7%83%AD%E7%82%B9%20when%3A1d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
+        "enabled": true,
+        "category": "world",
+        "fetch_limit": 15
       }
     ],
     "reddit": {
-      "enabled": true,
-      "subreddits": [
-        {
-          "subreddit": "MachineLearning",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 50
-        },
-        {
-          "subreddit": "LocalLLaMA",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 50
-        },
-        {
-          "subreddit": "artificial",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 30
-        },
-        {
-          "subreddit": "gaming",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 100
-        },
-        {
-          "subreddit": "NintendoSwitch",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 8,
-          "min_score": 50
-        },
-        {
-          "subreddit": "PS5",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 8,
-          "min_score": 50
-        },
-        {
-          "subreddit": "soccer",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 100
-        }
-      ],
+      "enabled": false,
+      "subreddits": [],
       "users": [],
-      "fetch_comments": 5
+      "fetch_comments": 0
+    },
+    "telegram": {
+      "enabled": false,
+      "channels": []
     }
   },
   "filtering": {
@@ -163,20 +179,38 @@
     "max_items": 25,
     "category_groups": {
       "ai": {
-        "limit": 10,
-        "categories": ["ai-news", "ai-tools", "ai-news-zh", "machine-learning"]
+        "name": "AI",
+        "names": {"zh": "AI", "en": "AI"},
+        "limit": 5,
+        "categories": ["ai"]
       },
       "gaming": {
-        "limit": 6,
+        "name": "游戏",
+        "names": {"zh": "游戏", "en": "Gaming"},
+        "limit": 5,
         "categories": ["gaming"]
       },
-      "sports": {
-        "limit": 4,
-        "categories": ["sports", "soccer"]
+      "anime": {
+        "name": "二次元",
+        "names": {"zh": "二次元", "en": "Anime & ACG"},
+        "limit": 5,
+        "categories": ["anime"]
+      },
+      "china": {
+        "name": "国内热点",
+        "names": {"zh": "国内热点", "en": "China News"},
+        "limit": 5,
+        "categories": ["china"]
+      },
+      "world": {
+        "name": "国际热点",
+        "names": {"zh": "国际热点", "en": "World News"},
+        "limit": 5,
+        "categories": ["world"]
       }
     },
     "default_group": "other",
-    "default_group_limit": 5
+    "default_group_limit": 0
   },
   "webhook": {
     "enabled": false

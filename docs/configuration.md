@@ -246,12 +246,16 @@ All sources are configured under the top-level `sources` key in `config.json`.
         "name": "Blog Name",
         "url": "https://example.com/feed.xml",
         "enabled": true,
-        "category": "ai-ml"
+        "category": "ai-ml",
+        "fetch_limit": 10
       }
     ]
   }
 }
 ```
+
+- `fetch_limit` — optional per-feed cap applied before the time-window filter;
+  useful for high-volume feeds and predictable AI token usage
 
 ### Reddit
 
@@ -438,6 +442,7 @@ Content is scored 0-10:
     "category_groups": {
       "ai": {
         "name": "AI / Machine Learning",
+        "names": {"zh": "人工智能", "en": "AI / Machine Learning"},
         "limit": 5,
         "categories": ["ai-news", "ai-tools", "machine-learning", "llm"]
       },
@@ -460,14 +465,24 @@ Content is scored 0-10:
   `limit` and a non-empty `categories` list. Items within each group are kept by
   AI score, highest first.
 - `category_groups.*.name`: Optional display name used in run logs
+- `category_groups.*.names`: Optional language-to-label map used for section
+  headings in generated summaries, for example `{"zh": "国内热点", "en":
+  "China News"}`. `name` is used as the fallback.
 - `default_group`: Group key for items whose category does not match any
   configured group. Default is `other`.
-- `default_group_limit`: Optional positive limit for unmatched items. If omitted,
+- `default_group_limit`: Optional non-negative limit for unmatched items. Set it
+  to `0` to keep the digest strictly limited to configured sections. If omitted,
   unmatched items are unlimited except for `max_items`.
 
 Balanced digest filtering runs after AI score threshold filtering and topic
 deduplication, but before enrichment. This reduces enrichment calls to only the
 items that can appear in the final digest.
+
+When category groups are configured, generated Markdown is rendered in group
+configuration order. Each group becomes a section and uses the localized label
+from `names` when available. Configured sections remain visible with a short
+empty-state message when no item in that group meets the score threshold.
+Without category groups, summaries keep the legacy score-ordered flat layout.
 
 Group matching uses the source category stored in `ContentItem.metadata.category`.
 All source types support a `category` field: `sources.rss[].category`,
