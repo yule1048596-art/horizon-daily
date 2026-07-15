@@ -1,7 +1,7 @@
 """Daily summary generation — pure programmatic rendering."""
 
 import re
-from typing import List, Dict
+from typing import Dict, List, Optional, Tuple
 
 from ..models import ContentItem
 
@@ -19,12 +19,13 @@ def _pangu(text: str) -> str:
 
 LABELS = {
     "en": {
-        "header": "Horizon Daily",
+        "header": "Horizon Briefing",
         "source": "Source",
         "background": "Background",
         "discussion": "Discussion",
         "references": "References",
         "tags": "Tags",
+        "empty_section": "No items in this section met the importance threshold.",
         "selected_items": "From {total} items, {selected} important content pieces were selected",
         "empty_analyzed": "Analyzed {total} items, but none met the importance threshold.",
         "empty_body": (
@@ -39,12 +40,13 @@ LABELS = {
         ),
     },
     "zh": {
-        "header": "Horizon 每日速递",
+        "header": "Horizon 热点速递",
         "source": "来源",
         "background": "背景",
         "discussion": "社区讨论",
         "references": "参考链接",
         "tags": "标签",
+        "empty_section": "本板块暂无达到重要性阈值的资讯。",
         "selected_items": "从 {total} 条内容中筛选出 {selected} 条重要资讯。",
         "empty_analyzed": "已分析 {total} 条内容，但没有达到重要性阈值的条目。",
         "empty_body": (
@@ -73,6 +75,7 @@ class DailySummarizer:
         date: str,
         total_fetched: int,
         language: str = "en",
+        sections: Optional[List[Tuple[str, str]]] = None,
     ) -> str:
         """Generate daily summary in Markdown format.
 
@@ -98,20 +101,97 @@ class DailySummarizer:
             "---\n\n"
         )
 
+        grouped_items = self._group_items(items, language, sections)
+
         # TOC
         toc_entries = []
-        for i, item in enumerate(items):
-            _t = item.metadata.get(f"title_{language}") or item.title
-            t = str(_t).replace("[", "(").replace("]", ")")
-            if language == "zh":
-                t = _pangu(t)
-            score = item.ai_score or "?"
-            toc_entries.append(f"{i + 1}. [{t}](#item-{i + 1}) \u2b50\ufe0f {score}/10")
+        for group_name, group in grouped_items:
+            if group_name:
+                if toc_entries:
+                    toc_entries.append("")
+                toc_entries.append(f"**{group_name}**")
+                toc_entries.append("")
+            for index, item in group:
+                _t = item.metadata.get(f"title_{language}") or item.title
+                t = str(_t).replace("[", "(").replace("]", ")")
+                if language == "zh":
+                    t = _pangu(t)
+                score = item.ai_score or "?"
+                toc_entries.append(
+                    f"{index}. [{t}](#item-{index}) \u2b50\ufe0f {score}/10"
+                )
         toc = "\n".join(toc_entries) + "\n\n---\n\n"
 
-        parts = [self._format_item(item, labels, language, i + 1) for i, item in enumerate(items)]
+        parts = []
+        grouped = any(group_name for group_name, _ in grouped_items)
+        for group_name, group in grouped_items:
+            if group_name:
+                parts.append(f"## {group_name}\n\n")
+            if not group:
+                parts.append(f"_{labels['empty_section']}_\n\n")
+                continue
+            heading_level = 3 if grouped else 2
+            parts.extend(
+                self._format_item(
+                    item,
+                    labels,
+                    language,
+                    index,
+                    heading_level=heading_level,
+                )
+                for index, item in group
+            )
 
         return header + toc + "".join(parts)
+
+    @staticmethod
+    def _group_items(
+        items: List[ContentItem],
+        language: str,
+        section_definitions: Optional[List[Tuple[str, str]]] = None,
+    ) -> List[Tuple[str, List[Tuple[int, ContentItem]]]]:
+        """Group digest items by configured section while preserving score order."""
+        if not section_definitions and not any(
+            item.metadata.get("digest_group") for item in items
+        ):
+            return [("", list(enumerate(items, start=1)))]
+
+        sections: Dict[str, dict] = {}
+        for order, (group_key, group_name) in enumerate(section_definitions or []):
+            sections[group_key] = {
+                "order": order,
+                "items": [],
+                "name": group_name,
+                "names": {language: group_name},
+            }
+
+        for item in items:
+            group_key = str(item.metadata.get("digest_group") or "other")
+            section = sections.setdefault(
+                group_key,
+                {
+                    "order": item.metadata.get("digest_group_order", len(sections)),
+                    "items": [],
+                    "name": item.metadata.get("digest_group_name") or group_key,
+                    "names": item.metadata.get("digest_group_names") or {},
+                },
+            )
+            section["items"].append(item)
+
+        ordered = sorted(sections.values(), key=lambda section: section["order"])
+        result = []
+        next_index = 1
+        for section in ordered:
+            localized_name = section["names"].get(language) or section["name"]
+            label = str(localized_name).replace("[", "(").replace("]", ")")
+            if language == "zh":
+                label = _pangu(label)
+            indexed_items = []
+            for item in section["items"]:
+                indexed_items.append((next_index, item))
+                next_index += 1
+            result.append((label, indexed_items))
+        return result
 
     def generate_webhook_overview(
         self,
@@ -160,7 +240,14 @@ class DailySummarizer:
         prefix = f"第 {index}/{total} 条\n\n" if language == "zh" else f"Item {index}/{total}\n\n"
         return prefix + self._format_item(item, labels, language, index).rstrip("-\n ")
 
-    def _format_item(self, item: ContentItem, labels: dict, language: str, index: int) -> str:
+    def _format_item(
+        self,
+        item: ContentItem,
+        labels: dict,
+        language: str,
+        index: int,
+        heading_level: int = 2,
+    ) -> str:
         """Format a single ContentItem into Markdown."""
         _title = item.metadata.get(f"title_{language}") or item.title
         title = str(_title).replace("[", "(").replace("]", ")")
@@ -215,7 +302,7 @@ class DailySummarizer:
 
         lines = [
             f'<a id="item-{index}"></a>',
-            f"## [{title}]({url}) \u2b50\ufe0f {score}/10",  # ⭐️
+            f"{'#' * heading_level} [{title}]({url}) \u2b50\ufe0f {score}/10",  # ⭐️
             "",
             summary,
             "",

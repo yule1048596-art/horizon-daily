@@ -94,3 +94,23 @@ def test_analyze_batch_concurrent_preserves_order(monkeypatch):
     result = asyncio.run(analyzer.analyze_batch(items))
 
     assert [item.id for item in result] == [item.id for item in items]
+
+
+def test_analyze_item_includes_source_category_in_prompt():
+    captured = {}
+
+    class Client:
+        config = SimpleNamespace()
+
+        async def complete(self, *, system, user):
+            captured["system"] = system
+            captured["user"] = user
+            return '{"score": 8, "reason": "important", "summary": "summary", "tags": []}'
+
+    item = _make_item("rss:test:category")
+    item.metadata["category"] = "china"
+
+    asyncio.run(ContentAnalyzer(Client())._analyze_item(item))
+
+    assert "Category: china" in captured["user"]
+    assert "China domestic affairs" in captured["system"]

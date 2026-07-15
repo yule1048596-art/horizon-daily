@@ -317,9 +317,11 @@ docker compose run --rm horizon --hours 48   # 抓取最近 48 小时的内容
 
 生成的日报将保存在 `data/summaries/` 目录中。
 
-### 4. 自动化（可选）
+### 4. 按需刷新
 
-Horizon 非常适合作为 **GitHub Actions** 定时任务运行。查看 [`.github/workflows/daily-summary.yml`](.github/workflows/daily-summary.yml) 获取现成的工作流配置，可自动生成日报并部署到 GitHub Pages。
+这个部署不会定时自动运行。可以点击 GitHub Pages 首页的刷新按钮，或打开
+[`.github/workflows/daily-summary.yml`](.github/workflows/daily-summary.yml)，选择最近
+3、7 或 14 天后手动运行。重复刷新会取消较早的运行，避免重复消耗 AI Token。
 
 ## 支持的信息源
 
