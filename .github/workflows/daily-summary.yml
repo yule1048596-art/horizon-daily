@@ -1,14 +1,27 @@
-name: Daily Horizon Summary
+name: Refresh Horizon News
+run-name: Refresh recent ${{ inputs.lookback_days }} days of news
 
 on:
-  schedule:
-    # 每天 22:00 UTC = 北京时间 06:00
-    - cron: '0 22 * * *'
-  workflow_dispatch:      # 允许手动触发
+  workflow_dispatch:
+    inputs:
+      lookback_days:
+        description: "新闻回看范围"
+        required: true
+        default: "7"
+        type: choice
+        options:
+          - "3"
+          - "7"
+          - "14"
+
+concurrency:
+  group: horizon-manual-refresh
+  cancel-in-progress: true
 
 jobs:
-  daily-summary:
+  refresh-news:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: write  # 需要写入权限来提交更改
 
@@ -34,7 +47,10 @@ jobs:
         env:
           MIMO_API_KEY: ${{ secrets.MIMO_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: uv run horizon --hours 24
+          LOOKBACK_DAYS: ${{ inputs.lookback_days }}
+        run: |
+          LOOKBACK_HOURS=$((LOOKBACK_DAYS * 24))
+          uv run horizon --hours "$LOOKBACK_HOURS"
 
       - name: Set current date as environment variable
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
@@ -45,6 +61,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           keep_files: true
-          commit_message: "📝 Daily Summary: ${{ env.DATE }}"
+          commit_message: "🔄 Hotspot refresh: ${{ env.DATE }}"
           publish_branch: gh-pages
           enable_jekyll: true
