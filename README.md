@@ -328,9 +328,12 @@ docker compose run --rm horizon --hours 48  # Fetch from last 48 hours
 
 The generated report will be saved to `data/summaries/`.
 
-### 4. Automate (Optional)
+### 4. Refresh on Demand
 
-Horizon works great as a **GitHub Actions** cron job. See [`.github/workflows/daily-summary.yml`](.github/workflows/daily-summary.yml) for a ready-to-use workflow that generates and deploys your daily briefing to GitHub Pages automatically.
+This deployment does not run on a schedule. Use the refresh button on the
+GitHub Pages home page or open [`.github/workflows/daily-summary.yml`](.github/workflows/daily-summary.yml),
+choose a 3, 7, or 14-day lookback, and run the workflow manually. Concurrent
+refreshes cancel the older run to avoid duplicate AI token usage.
 
 ## Supported Sources
 

@@ -114,7 +114,7 @@
       },
       {
         "name": "Google News - 二次元",
-        "url": "https://news.google.com/rss/search?q=%E5%8A%A8%E6%BC%AB%20OR%20%E4%BA%8C%E6%AC%A1%E5%85%83%20OR%20%E6%97%A5%E6%9C%AC%E5%8A%A8%E7%94%BB%20OR%20%E6%BC%AB%E7%94%BB%20when%3A1d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
+        "url": "https://news.google.com/rss/search?q=%E5%8A%A8%E6%BC%AB%20OR%20%E4%BA%8C%E6%AC%A1%E5%85%83%20OR%20%E6%97%A5%E6%9C%AC%E5%8A%A8%E7%94%BB%20OR%20%E6%BC%AB%E7%94%BB%20when%3A14d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
         "enabled": true,
         "category": "anime",
         "fetch_limit": 15
@@ -128,14 +128,14 @@
       },
       {
         "name": "Google News - 国内社会民生",
-        "url": "https://news.google.com/rss/search?q=%E4%B8%AD%E5%9B%BD%20%E7%A4%BE%E4%BC%9A%20%E6%B0%91%E7%94%9F%20%E7%83%AD%E7%82%B9%20when%3A1d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
+        "url": "https://news.google.com/rss/search?q=%E4%B8%AD%E5%9B%BD%20%E7%A4%BE%E4%BC%9A%20%E6%B0%91%E7%94%9F%20%E7%83%AD%E7%82%B9%20when%3A14d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
         "enabled": true,
         "category": "china",
         "fetch_limit": 15
       },
       {
         "name": "Google News - 国内政策经济",
-        "url": "https://news.google.com/rss/search?q=%E4%B8%AD%E5%9B%BD%20%E6%94%BF%E7%AD%96%20%E7%BB%8F%E6%B5%8E%20%E7%83%AD%E7%82%B9%20when%3A1d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
+        "url": "https://news.google.com/rss/search?q=%E4%B8%AD%E5%9B%BD%20%E6%94%BF%E7%AD%96%20%E7%BB%8F%E6%B5%8E%20%E7%83%AD%E7%82%B9%20when%3A14d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
         "enabled": true,
         "category": "china",
         "fetch_limit": 15
@@ -156,7 +156,7 @@
       },
       {
         "name": "Google News - 国际热点",
-        "url": "https://news.google.com/rss/search?q=%E5%9B%BD%E9%99%85%20%E7%83%AD%E7%82%B9%20when%3A1d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
+        "url": "https://news.google.com/rss/search?q=%E5%9B%BD%E9%99%85%20%E7%83%AD%E7%82%B9%20when%3A14d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
         "enabled": true,
         "category": "world",
         "fetch_limit": 15
@@ -175,7 +175,7 @@
   },
   "filtering": {
     "ai_score_threshold": 5.5,
-    "time_window_hours": 24,
+    "time_window_hours": 168,
     "max_items": 25,
     "category_groups": {
       "ai": {
